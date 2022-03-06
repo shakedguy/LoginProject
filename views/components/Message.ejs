@@ -1,0 +1,30 @@
+<p class="ms-3 mt-3 mb-1"><strong> Message:</strong></p>
+<div class="form-check form-switch">
+  <input
+    class="form-check-input ms-1"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault1"
+    data-bs-toggle="collapse"
+    data-bs-target="#message"
+    aria-expanded="false"
+    aria-controls="message"
+    checked
+    onchange="onMessageSwitchChangeHandler(event)"
+  />
+  <label class="form-check-label ms-2 text-black" for="flexSwitchCheckDefault1">Default</label>
+</div>
+<div class="collapse multi-collapse" id="message">
+  <div class="form-floating mb-3" id="message-container">
+    <textarea
+      class="form-control"
+      id="message-input"
+      rows="3"
+      id="floatingInput"
+      placeholder="Enter your message here"
+      oninput="onInputHandler(event)"
+    ></textarea>
+    <label for="floatingInputInvalid">Enter your message here</label>
+    <div class="invalid-feedback" id="message-feedback-id">Message cannot be empty</div>
+  </div>
+</div>

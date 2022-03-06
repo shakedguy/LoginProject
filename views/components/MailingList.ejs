@@ -1,0 +1,18 @@
+<div class="input-group flex-column mb-5">
+  <%-contacts.map((contact) => { return `
+  <div class="form-check ms-3 mailing-list-containers" id="contact-container-${contact.id}">
+    <input
+      class="form-check-input mailing-list-checkbox border-dark is-invalid"
+      type="checkbox"
+      name="radio-stacked"
+      oninput="onChangeHandler(event)"
+      id="contact${contact.id}"
+      required
+    />
+    <label class="form-check-label text-black" style="padding: 0 10px" for="contact${contact.id}"
+      >${contact.name}</label
+    >
+    <div class="invalid-feedback contacts-feedback" id="contact-feedback-${contact.id}">Required</div>
+  </div>
+  ` }).join('')%>
+</div>
