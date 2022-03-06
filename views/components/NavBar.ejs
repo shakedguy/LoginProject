@@ -1,0 +1,40 @@
+<nav class="navbar navbar-dark bg-primary m-0" style="height: 10vh; padding: 0">
+  <div class="container-fluid p-1">
+    <ul class="navbar nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/">
+          <span class="material-icons" style="color: #d5d8dc">home</span>
+          <span class="tooltip-txt">Home</span>
+        </a>
+      </li>
+    </ul>
+    <h2 class="pb-2" style="font-weight: 600"><%- title %></h2>
+    <ul class="navbar nav-pills">
+      <li class="nav-item m-0">
+        <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/profile">
+          <%if(isLogedIn && userData && userData.picture){%>
+          <img src="<%-userData.picture%>" class="img-fluid rounded-circle" alt="user photo" width="24" height="24" />
+          <%}else{%>
+          <span class="material-icons" style="color: #d5d8dc">account_circle</span>
+          <%}%>
+          <span class="tooltip-txt">Profile</span>
+        </a>
+      </li>
+      <%if (isLogedIn) { %>
+      <li class="nav-item m-0">
+        <a class="nav-link active text-decoration-none d-flex me-1" id="liveToastBtn" id="nav-link" aria-current="page">
+          <span class="material-icons" style="color: #d5d8dc">logout</span>
+          <span class="tooltip-txt">Logout</span>
+        </a>
+      </li>
+      <% }else{ %>
+      <li class="nav-item m-0 me-2">
+        <a class="nav-link active text-decoration-none d-flex me-1" id="nav-link" aria-current="page" href="/login">
+          <span class="material-icons" style="color: #d5d8dc">login</span>
+          <span class="tooltip-txt">Login</span>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
