@@ -4,7 +4,7 @@
     class="form-check-input ms-1"
     type="checkbox"
     role="switch"
-    id="flexSwitchCheckDefault1"
+    id="message-switch"
     data-bs-toggle="collapse"
     data-bs-target="#message"
     aria-expanded="false"
@@ -12,7 +12,7 @@
     checked
     onchange="onMessageSwitchChangeHandler(event)"
   />
-  <label class="form-check-label ms-2 text-black" for="flexSwitchCheckDefault1">Default</label>
+  <label class="form-check-label ms-2 text-black" for="message-switch">Default</label>
 </div>
 <div class="collapse multi-collapse" id="message">
   <div class="form-floating mb-3" id="message-container">
@@ -23,6 +23,7 @@
       id="floatingInput"
       placeholder="Enter your message here"
       oninput="onInputHandler(event)"
+      required
     ></textarea>
     <label for="floatingInputInvalid">Enter your message here</label>
     <div class="invalid-feedback" id="message-feedback-id">Message cannot be empty</div>
