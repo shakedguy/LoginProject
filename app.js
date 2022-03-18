@@ -9,7 +9,7 @@ const admin = require('firebase-admin');
 // dotnev.config({ path: `${__dirname}/config.env` });
 
 const app = express();
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
 admin.initializeApp({
   credential: admin.credential.cert(require(path.join(__dirname, 'utils', 'serviceAccountKey.js'))),
@@ -38,6 +38,8 @@ app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist
 
 app.set('view engine', 'ejs');
 
-app.listen(port, () => {
-  console.log(`Listening on https://guyshaked-scheduled-messages.herokuapp.com:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Listening on https://guyshaked-scheduled-messages.herokuapp.com:${port}`);
+// });
+
+module.exports = app;

@@ -24,59 +24,38 @@ exports.getSenderPage = (req, res) => {
   });
 };
 
-exports.sendMessage = (req, res) => {
-  const contacts = req.body.contacts;
-  const sendAt = req.body.sendAt;
-  const message = req.body.message || null;
-  console.log(req.body);
+exports.prepareMessages = (req, res, next) => {
+  const { contacts, message, sendAt, via, now } = req.body;
+  const messages = [];
   contacts.map((contact) => {
     if (contact.send) {
-      if (req.body.now) {
-        if (req.body.via === 'whatsapp') {
-          twilio.messages
-            .create({
-              messagingServiceSid,
-              body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
-              to: 'whatsapp:' + contact.phone,
-            })
-            .then((message) => console.log(message.sid))
-            .done();
-        } else {
-          twilio.messages
-            .create({
-              messagingServiceSid,
-              body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
-              to: contact.phone,
-            })
-            .then((message) => console.log(message.sid))
-            .done();
-        }
-      } else {
-        if (req.body.via === 'whatsapp') {
-          twilio.messages
-            .create({
-              messagingServiceSid,
-              body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
-              sendAt,
-              scheduleType: 'fixed',
-              to: 'whatsapp:' + contact.phone,
-            })
-            .then((message) => console.log(message.sid))
-            .done();
-        } else {
-          twilio.messages
-            .create({
-              messagingServiceSid,
-              body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
-              sendAt,
-              scheduleType: 'fixed',
-              to: contact.phone,
-            })
-            .then((message) => console.log(message.sid))
-            .done();
-        }
+      const messageObj = {
+        messagingServiceSid,
+        body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
+        to: `${via === 'whatsapp' ? 'whatsapp:' : ''}${contact.phone}`,
+      };
+      if (!now) {
+        messageObj['sendAt'] = sendAt;
+        messageObj['scheduleType'] = 'fixed';
       }
+      if (via === 'whatsapp') {
+        messageObj['from'] = 'whatsapp:+14155238886';
+      }
+      messages.push(messageObj);
     }
+  });
+
+  req.messages = messages;
+  next();
+};
+
+exports.sendMessage = (req, res) => {
+  const { messages } = req;
+  messages.map((message) => {
+    twilio.messages
+      .create(message)
+      .then((message) => console.log(message.sid))
+      .done();
   });
   res.end(JSON.stringify({ status: 'success' }));
 };

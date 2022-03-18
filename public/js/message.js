@@ -3,16 +3,20 @@ const messageInput = document.getElementById('message-input');
 let message = '';
 const onInputHandler = (event) => {
   message = event.target.value;
-  if (message.length > 0) {
+  if (message) {
     feedback.innerHTML = 'Looks good!👌';
     feedback.classList.add('valid-feedback');
     feedback.classList.remove('invalid-feedback');
     feedback.style.color = 'green';
+    messageInput.classList.remove('is-invalid');
+    messageInput.classList.add('is-valid');
   } else {
     feedback.innerHTML = 'Message cannot be empty';
     feedback.classList.add('invalid-feedback');
     feedback.classList.remove('valid-feedback');
     feedback.style.color = 'red';
+    messageInput.classList.remove('is-valid');
+    messageInput.classList.add('is-invalid');
   }
 };
 
