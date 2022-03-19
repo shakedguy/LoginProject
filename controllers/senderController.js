@@ -41,6 +41,7 @@ exports.prepareMessages = (req, res, next) => {
       if (via === 'whatsapp') {
         messageObj['from'] = 'whatsapp:+14155238886';
       }
+      console.log(messageObj);
       messages.push(messageObj);
     }
   });

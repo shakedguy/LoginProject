@@ -24,6 +24,7 @@ const onMessageSwitchChangeHandler = (event) => {
   if (event.target.checked) {
     messageInput.removeAttribute('required');
     messageInput.classList.remove('is-invalid');
+    message = null;
   } else {
     messageInput.setAttribute('required', 'true');
     messageInput.classList.add('is-invalid');
