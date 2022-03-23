@@ -183,6 +183,56 @@ button:hover {
   filter: brightness(var(--hover-brightness));
 }
 
+#offcanvasWithBothOptions {
+  max-width: 20vw;
+}
+
+.main-nav > .nav-link {
+  color: #333;
+}
+
+.main-nav:hover {
+  cursor: pointer;
+  background: #ddd;
+}
+
+.arrow-forward {
+  cursor: pointer;
+  -webkit-animation: spin 0.5s ease-out forwards;
+  -moz-animation: spin 0.5s ease-out forwards;
+  animation: spin 0.5s ease-out forwards;
+}
+
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(-180deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(-180deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .card {
     max-width: 18rem;

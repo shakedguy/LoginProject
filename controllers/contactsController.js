@@ -9,6 +9,11 @@ ref.once('value', (snapshot) => {
   contacts = getContacts(snapshot.val().Contacts);
 });
 
+exports.fetchContact = (req, res, next) => {
+  req.contacts = contacts;
+  next();
+};
+
 exports.getAllContacts = (req, res) => {
   res.status(200).json({
     status: 'success',
