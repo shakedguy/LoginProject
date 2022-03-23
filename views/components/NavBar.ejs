@@ -2,13 +2,25 @@
   <div class="container-fluid p-1">
     <ul class="navbar nav-pills">
       <li class="nav-item">
+        <button
+          class="nav-link active text-decoration-none d-flex me-1 menu-btn"
+          id="btn-menu"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+        >
+          <span class="material-icons" style="color: #d5d8dc">menu</span>
+          <span class="tooltip-txt">Menu</span>
+        </button>
+      </li>
+      <li class="nav-item">
         <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/">
           <span class="material-icons" style="color: #d5d8dc">home</span>
           <span class="tooltip-txt">Home</span>
         </a>
       </li>
     </ul>
-    <h2 class="pb-2" style="font-weight: 600"><%- title %></h2>
+    <h2 class="pb-2" id="main-title" style="font-weight: 600"><%- title %></h2>
     <ul class="navbar nav-pills">
       <li class="nav-item m-0">
         <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/profile">

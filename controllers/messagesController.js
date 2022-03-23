@@ -1,10 +1,10 @@
 const path = require('path');
 const admin = require('firebase-admin');
 const { getContacts } = require(path.join(__dirname, '..', 'utils', 'helpers.js'));
-const accountSid = process.env.ACCOUNT_SID;
-const authToken = process.env.AUTH_TOKEN;
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilio = require('twilio')(accountSid, authToken);
-const messagingServiceSid = process.env.MESSAGING_SERVICE_SID;
+const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
 const firebaseConfig = require(path.join(__dirname, '..', 'utils', 'firebaseConfigs.js'));
 
 let contacts = [];
@@ -13,6 +13,8 @@ const ref = db.ref('/');
 ref.once('value', (snapshot) => {
   contacts = getContacts(snapshot.val().Contacts);
 });
+
+const from = process.env.TWILIO_NUMBER;
 
 exports.getSenderPage = (req, res) => {
   res.render('sender', {
@@ -31,6 +33,7 @@ exports.prepareMessages = (req, res, next) => {
     if (contact.send) {
       const messageObj = {
         messagingServiceSid,
+        from: `${via === 'whatsapp' ? 'whatsapp:' : ''}${from}`,
         body: message || `Hi ${contact.name}, this is a test message from ${req.userData.name}`,
         to: `${via === 'whatsapp' ? 'whatsapp:' : ''}${contact.phone}`,
       };
@@ -38,10 +41,6 @@ exports.prepareMessages = (req, res, next) => {
         messageObj['sendAt'] = sendAt;
         messageObj['scheduleType'] = 'fixed';
       }
-      if (via === 'whatsapp') {
-        messageObj['from'] = 'whatsapp:+14155238886';
-      }
-      console.log(messageObj);
       messages.push(messageObj);
     }
   });
@@ -59,4 +58,13 @@ exports.sendMessage = (req, res) => {
       .done();
   });
   res.end(JSON.stringify({ status: 'success' }));
+};
+
+exports.receiveSmsMessage = (req, res) => {};
+exports.receiveWhatsppMessage = (req, res) => {
+  console.log(req.body);
+};
+
+exports.whatsppMessageStatus = (req, res) => {
+  console.log(req.body);
 };

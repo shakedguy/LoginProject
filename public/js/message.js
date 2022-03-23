@@ -1,32 +1,28 @@
-const feedback = document.getElementById('message-feedback-id');
-const messageInput = document.getElementById('message-input');
+const feedback = $('#message-feedback-id');
+const messageInput = $('#message-input');
 let message = '';
-const onInputHandler = (event) => {
+export const onInputHandler = (event) => {
   message = event.target.value;
   if (message) {
-    feedback.innerHTML = 'Looks good!👌';
-    feedback.classList.add('valid-feedback');
-    feedback.classList.remove('invalid-feedback');
-    feedback.style.color = 'green';
-    messageInput.classList.remove('is-invalid');
-    messageInput.classList.add('is-valid');
+    feedback.empty().append('Looks good!👌');
+    feedback.removeClass('invalid-feedback').addClass('valid-feedback');
+    feedback.css('color', 'green');
+    messageInput.removeClass('is-invalid').addClass('is-valid');
   } else {
-    feedback.innerHTML = 'Message cannot be empty';
-    feedback.classList.add('invalid-feedback');
-    feedback.classList.remove('valid-feedback');
-    feedback.style.color = 'red';
-    messageInput.classList.remove('is-valid');
-    messageInput.classList.add('is-invalid');
+    feedback.empty().append('Message cannot be empty');
+    feedback.removeClass('valid-feedback').addClass('invalid-feedback');
+    feedback.css('color', 'red');
+    messageInput.removeClass('is-valid').addClass('is-invalid');
   }
 };
 
-const onMessageSwitchChangeHandler = (event) => {
+export const onMessageSwitchChangeHandler = (event) => {
   if (event.target.checked) {
-    messageInput.removeAttribute('required');
-    messageInput.classList.remove('is-invalid');
+    messageInput.removeAttr('required');
+    messageInput.removeClass('is-invalid');
     message = null;
   } else {
-    messageInput.setAttribute('required', 'true');
-    messageInput.classList.add('is-invalid');
+    messageInput.attr('required', 'true');
+    messageInput.addClass('is-invalid');
   }
 };

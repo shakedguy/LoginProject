@@ -5,15 +5,12 @@ const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
-// const dotnev = require('dotenv');
-// dotnev.config({ path: `${__dirname}/config.env` });
 
 const app = express();
-// const port = process.env.PORT || 3000;
 
 admin.initializeApp({
   credential: admin.credential.cert(require(path.join(__dirname, 'utils', 'serviceAccountKey.js'))),
-  databaseURL: process.env.DATABASE_URL,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
 });
 
 app.use(express.json());
@@ -27,9 +24,11 @@ app.use('/', require(path.join(__dirname, 'routes', 'indexRoute')));
 app.use('/login', require(path.join(__dirname, 'routes', 'loginRoute')));
 app.use('/logout', require(path.join(__dirname, 'routes', 'logoutRoute')));
 app.use('/profile', require(path.join(__dirname, 'routes', 'profileRoute')));
-app.use('/sender', require(path.join(__dirname, 'routes', 'senderRoute')));
+app.use('/messages', require(path.join(__dirname, 'routes', 'messagesRoute')));
+app.use('/users', require(path.join(__dirname, 'routes', 'usersRoute')));
 app.use('/api/contacts', require(path.join(__dirname, 'routes', 'contactsRoute')));
 app.use('/api/firebase', require(path.join(__dirname, 'routes', 'firebaseRoute')));
+app.use('/api/menu', require(path.join(__dirname, 'routes', 'menuRoute')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css', express.static(path.join(__dirname, 'public', 'css')));
 app.use('/js', express.static(path.join(__dirname, 'public', 'js')));

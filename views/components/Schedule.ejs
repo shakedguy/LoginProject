@@ -10,13 +10,12 @@
     aria-expanded="false"
     aria-controls="collapse"
     checked
-    onchange="onScheduledSwitchChangeHandler()"
   />
   <label class="form-check-label text-black" for="schedule-switch">Now</label>
   <div class="collapse multi-collapse" id="collapse">
     <p style="margin: 20px 0">When ?</p>
     <div class="form-check">
-      <input class="text-center" id="datePicker" type="datetime-local" oninput="onInputDateHandler(event)" />
+      <input class="text-center" id="datePicker" type="datetime-local" />
       <div class="invalid-feedback" id="schedule-feedback">Required</div>
     </div>
   </div>

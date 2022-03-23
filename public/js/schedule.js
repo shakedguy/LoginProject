@@ -1,40 +1,38 @@
-const datePicker = document.getElementById('datePicker');
-const container = document.getElementById('collapse');
-const scheduleFeedback = document.getElementById('schedule-feedback');
-let now = true;
+export const datePicker = $('#datePicker');
+const scheduleFeedback = $('#schedule-feedback');
+export const scheduleSwitch = $('#schedule-switch');
 
-const onScheduledSwitchChangeHandler = () => {
-  now = !now;
-  if (now) {
-    datePicker.removeAttribute('required');
-    datePicker.classList.remove('is-invalid');
+export const onScheduledSwitchChangeHandler = (event) => {
+  if (event.target.checked) {
+    datePicker.removeAttr('required');
+    datePicker.removeClass('is-invalid');
   } else {
-    datePicker.setAttribute('required', 'true');
-    datePicker.classList.add('is-invalid');
+    datePicker.attr('required', 'true');
+    datePicker.addClass('is-invalid');
   }
 };
 
-const dateTimeValidation = (dateTime) => {
+export const dateTimeValidation = (dateTime) => {
   const millisecondsToHours = 1000 * 60 * 60;
   const now = new Date();
-  return dateTime - now >= millisecondsToHours;
+  const distance = new Date(dateTime) - now;
+  return distance >= millisecondsToHours;
 };
 
-const onInputDateHandler = (event) => {
+export const onInputDateHandler = (event) => {
   if (event.target.value.length === 0) {
-    scheduleFeedback.innerHTML = 'Required';
-    scheduleFeedback.classList.add('is-invalid');
-    scheduleFeedback.style.color = 'red';
+    scheduleFeedback.empty().append('Required');
+    scheduleFeedback.addClass('is-invalid').css('color', 'red');
   }
 
   const date = new Date(event.target.value);
   if (dateTimeValidation(date)) {
-    scheduleFeedback.innerHTML = 'Looks good!👌';
-    scheduleFeedback.classList.add('valid-feedback');
-    scheduleFeedback.style.color = 'green';
+    scheduleFeedback.empty().append('Looks good!👌');
+    scheduleFeedback.addClass('valid-feedback').css('color', 'green');
   } else {
-    scheduleFeedback.innerHTML = 'Must be at least 1 hour ahead';
-    scheduleFeedback.classList.add('is-invalid');
-    scheduleFeedback.style.color = 'red';
+    scheduleFeedback.empty().append('Must be at least 1 hour ahead');
+    scheduleFeedback.addClass('is-invalid').css('color', 'red');
   }
 };
+
+export const toSendNow = () => scheduleSwitch.is(':checked');
