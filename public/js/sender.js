@@ -1,6 +1,6 @@
 import { dateTimeValidation, toSendNow } from './schedule.js';
 import { contacts } from './mailingList.js';
-const liveToast = $('#notification');
+const liveToast = $('#notification').first();
 const toastText = $('#toast-text');
 const scheduleSwitch = $('#schedule-switch');
 const messageText = $('#message-input');
@@ -36,6 +36,7 @@ const formValidation = () => {
   if (!scheduleSwitch.is(':checked') && !dateTimeValidation(datePicker.value)) {
     if (liveToast.length > 0) {
       liveToast.removeClass('bg-primary bg-seccess').addClass('bg-danger');
+
       const toast = new bootstrap.Toast(liveToast);
       const msg = datePicker.value ? 'Must be at least 1 hour ahead‼️😬' : 'You must pick date and time‼️😬';
       toastText.empty().append(msg);
@@ -47,14 +48,15 @@ const formValidation = () => {
 };
 
 export const submitHandler = async (event) => {
-  console.log('submit');
   const now = toSendNow();
   event.preventDefault();
+
   if (formValidation()) {
     const sendAt = new Date(datePicker.value);
 
     const message = messageText.text() || null;
-    await fetch('/messages', {
+
+    await fetch(`/admin/messages/${event.originalEvent.submitter.id}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

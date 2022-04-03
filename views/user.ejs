@@ -1,0 +1,35 @@
+<% if(users) { %>
+<section>
+  <div class="card align-self-center shadow bg-body rounded border-0">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <img src="<%= users.photoURL %>" class="card-img-top" alt="user photo" />
+      <a href="#!">
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+      </a>
+    </div>
+    <div class="card-body">
+      <p class="card-text text-start p-0 m-0">
+        <strong class="me-2">Uid:</strong> <%- users.uid || "Undefined" %><br />
+        <strong class="me-2">Name:</strong> <%- users.displayName || "Undefined" %><br />
+        <strong class="me-2">Email:</strong> <%- users.email || "Undefined" %><br />
+        <strong class="me-2">Phone number: </strong><%- users.phoneNumber||"Undefined" %><br />
+        <strong class="me-2">Signing: </strong><%- users.metadata.creationTime || "Undefined" %><br />
+        <strong class="me-2">Last Login: </strong><%- users.metadata.lastSignInTime ||"Undefined" %><br />
+        <div class="d-flex flex-row m-0 p-0">
+            <strong class="me-2">Auth Provider: </strong>
+          <p class="p-0 m-0" id='providerId' style="width: fit-content">
+            <%- users.providerData.providerId ||"Undefined" -%>
+          </p>
+        </div>
+      </p>
+    </div>
+  </div>
+</section>
+
+<% } else { %>
+<div class="d-flex justify-content-center" style="width: 5rem; height: 5rem">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<%}%>

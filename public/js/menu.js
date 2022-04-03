@@ -4,43 +4,49 @@ export const canvas = $('.offcanvas');
 export const arrow = $('#arrow-forward');
 export const menuBtn = $('#btn-menu');
 
+const isAdmin = window.location.pathname.includes('admin');
 const getMenuItems = async () => {
-  const jsonResponse = await fetch('/api/menu');
+  const url = isAdmin ? '/admin' : '';
+  const jsonResponse = await fetch(url + '/api/menu');
   const response = await jsonResponse.json();
   return response.data;
 };
 let menu;
 
 const changeActive = () => {
-  const items = document.querySelectorAll('.main-nav');
-  const links = document.querySelectorAll('.main-nav-link');
-  links.forEach((link, index) => {
-    if (mainTitle.contents().text().includes(link.innerHTML)) {
-      items[index].classList.add('bg-secondary');
+  const items = $('.main-nav');
+  const links = $('.main-nav-link');
+  links.toArray().forEach((link, index) => {
+    if (mainTitle.text().includes(link.innerHTML)) {
+      items[index].classList.add('bg-primary');
       link.classList.add('text-light');
     } else {
-      items[index].classList.remove('bg-secondary');
+      items[index].classList.remove('bg-primary');
       link.classList.remove('text-light');
     }
   });
 };
 const initMenu = () =>
-  window.addEventListener('DOMContentLoaded', async () => {
+  $(document).ready(async () => {
     menu = await getMenuItems();
 
     if (mainMenu && menu) {
       menu.forEach((item) => {
-        const li = document.createElement('li');
-        li.classList = 'nav-item main-nav rounded-1';
-        li.addEventListener('click', () => {
-          window.location.assign(item);
+        let href;
+        if (item !== 'Admin') {
+          href = isAdmin ? `/admin/${item.toLowerCase()}` : `/${item.toLowerCase()}`;
+        } else {
+          href = '/admin/login';
+        }
+        const li = $('<li class="nav-item main-nav rounded-1 d-flex justify-content-center"></li>');
+        li.click(() => {
+          window.location.assign(href);
           changeActive;
         });
-        const a = document.createElement('a');
-        a.classList = 'nav-link main-nav-link';
-        a.href = item.toLowerCase();
-        a.innerText = item;
-        li.appendChild(a);
+
+        const a = $(`<a class="nav-link main-nav-link" href=${href}></a>`);
+        a.text(item);
+        li.append(a);
         mainMenu.append(li);
       });
       changeActive();

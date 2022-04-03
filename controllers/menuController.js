@@ -1,5 +1,7 @@
-const items = ['Home', 'Profile', 'Users', 'Messages', 'Login', 'Register'];
+const items = ['Home', 'Profile', 'Admin'];
+const adminItems = ['Home', 'Profile', 'Messages', 'Users'];
 
 exports.getMenuItems = (req, res) => {
-  res.status(200).json({ data: items });
+  const data = req.baseUrl.includes('admin') && req.cookies.idToken ? adminItems : items;
+  res.status(200).json({ data });
 };

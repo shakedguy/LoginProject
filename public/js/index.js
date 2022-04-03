@@ -1,21 +1,46 @@
 import { onScheduledSwitchChangeHandler, onInputDateHandler, scheduleSwitch, datePicker } from './schedule.js';
 import { submitHandler } from './sender.js';
 import { firebaseInit } from './firebase.js';
-import initMenu, { canvas, arrow } from './menu.js';
+import initMenu, { canvas, arrow, menuBtn } from './menu.js';
 import { getHtmlMessagesList } from './mailingList.js';
 import { onMessageSwitchChangeHandler, onInputHandler } from './message.js';
+import { dataTableInit } from './users.js';
+
+const isAdmin = window.location.pathname.includes('admin');
+
+if (isAdmin) {
+  $('#nav-btn-home').attr('href', '/admin');
+}
+
+const getCookieValue = (name) => document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '';
+
+const mainSpinner = $('#main-spinner').first();
+
+$(window).on('load', () => {
+  if (mainSpinner.length > 0) {
+    mainSpinner.css('visibility', 'hidden');
+  }
+});
 
 initMenu();
 firebaseInit();
+dataTableInit();
 
 datePicker.on('input', onInputDateHandler);
+const loginButton = $('#login-button').first();
+if (loginButton) {
+  const href = isAdmin ? '/admin/login' : '/login';
+  loginButton.attr('href', href);
+}
 
 scheduleSwitch.on('change', onScheduledSwitchChangeHandler);
 
 $('#message-form')
   .ready(async () => {
+    mainSpinner.css('visibility', 'hidden');
     const contactList = await getHtmlMessagesList();
-    $('#contacts-list').append(contactList);
+    $('#mailing-list-spinner').first().css('visibility', 'hidden');
+    $('#contacts-list').first().append(contactList);
   })
   .submit(submitHandler);
 

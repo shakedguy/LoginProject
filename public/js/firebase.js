@@ -22,19 +22,27 @@ const uiConfig = {
   callbacks: {
     signInSuccess: (user, credential, redirectUrl) => {
       user.getIdToken().then((idToken) => {
+        const isAdmin = window.location.pathname.includes('admin');
+        const url = isAdmin ? '/admin/login' : '/login';
         return postIdTokenToSessionLogin(
-          '/login',
+          url,
           idToken,
           user.displayName,
           user.email,
           user.phoneNumber,
           user.photoURL
         ).then(
-          () => {
-            window.location.assign('/profile');
+          (response) => {
+            if (response.status === 200) {
+              const name = user.displayName.replaceAll(' ', '');
+              const redirect = isAdmin ? '/admin' : '';
+              window.location.assign(`${redirect}/profile?username=${name || user.email || user.phoneNumber}`);
+            } else {
+              window.location.assign('/error');
+            }
           },
           (error) => {
-            window.location.assign('/');
+            window.location.assign('/error');
           }
         );
       });
@@ -73,7 +81,7 @@ const uiConfig = {
 };
 
 export const firebaseInit = () =>
-  window.addEventListener('DOMContentLoaded', async () => {
+  $(window).ready(async () => {
     const firebaseConfig = await getFirebaseConfig();
 
     firebase.initializeApp(firebaseConfig);
@@ -81,13 +89,13 @@ export const firebaseInit = () =>
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
     uiConfig.callbacks.uiShown = () => {
-      document.getElementById('loader').style.display = 'none';
+      $('#loader').css('display', 'none');
     };
 
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.disableAutoSignIn();
-    const widget = document.getElementById('firebaseui-auth-container');
-    if (widget) {
-      ui.start(widget, uiConfig);
+    const widget = $('#firebaseui-auth-container');
+    if (widget.length > 0) {
+      ui.start(widget[0], uiConfig);
     }
   });

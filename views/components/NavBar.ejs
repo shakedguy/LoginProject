@@ -1,52 +1,72 @@
-<nav class="navbar navbar-dark bg-primary m-0" style="height: 10vh; padding: 0">
-  <div class="container-fluid p-1">
-    <ul class="navbar nav-pills">
-      <li class="nav-item">
-        <button
-          class="nav-link active text-decoration-none d-flex me-1 menu-btn"
-          id="btn-menu"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasWithBothOptions"
-          aria-controls="offcanvasWithBothOptions"
-        >
-          <span class="material-icons" style="color: #d5d8dc">menu</span>
-          <span class="tooltip-txt">Menu</span>
-        </button>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/">
-          <span class="material-icons" style="color: #d5d8dc">home</span>
-          <span class="tooltip-txt">Home</span>
-        </a>
-      </li>
-    </ul>
-    <h2 class="pb-2" id="main-title" style="font-weight: 600"><%- title %></h2>
-    <ul class="navbar nav-pills">
-      <li class="nav-item m-0">
-        <a class="nav-link active text-decoration-none d-flex me-1" aria-current="page" href="/profile">
-          <%if(isLogedIn && userData && userData.picture){%>
-          <img src="<%-userData.picture%>" class="img-fluid rounded-circle" alt="user photo" width="24" height="24" />
-          <%}else{%>
-          <span class="material-icons" style="color: #d5d8dc">account_circle</span>
-          <%}%>
-          <span class="tooltip-txt">Profile</span>
-        </a>
-      </li>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <div class="d-flex">
+      <button
+        class="navbar-toggler menu-btn"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        id="btn-menu"
+        aria-controls="offcanvasWithBothOptions"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="link-light ms-2" href="/" id="nav-btn-home" role="button" aria-expanded="false">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+    <h2 id="main-title" style="font-weight: 600"><%- title %></h2>
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <!-- Avatar -->
+      <a class="nav-link link-light active text-decoration-none d-flex" aria-current="page" href="/profile">
+        <%if(isLogedIn && userData && userData.picture){%>
+        <img
+          src="<%-userData.picture%>"
+          class="rounded-circle"
+          alt="user photo"
+          width="24"
+          height="24"
+          loading="lazy"
+        />
+        <%}else{%>
+        <span class="material-icons">account_circle</span>
+        <%}%>
+        <span class="tooltip-txt">Profile</span>
+      </a>
+
       <%if (isLogedIn) { %>
-      <li class="nav-item m-0">
-        <a class="nav-link active text-decoration-none d-flex me-1" id="liveToastBtn" id="nav-link" aria-current="page">
-          <span class="material-icons" style="color: #d5d8dc">logout</span>
-          <span class="tooltip-txt">Logout</span>
-        </a>
-      </li>
+
+      <a
+        class="nav-link link-light active text-decoration-none d-flex me-1"
+        id="liveToastBtn"
+        id="nav-link"
+        aria-current="page"
+      >
+        <span class="material-icons">logout</span>
+        <span class="tooltip-txt">Logout</span>
+      </a>
+
       <% }else{ %>
-      <li class="nav-item m-0 me-2">
-        <a class="nav-link active text-decoration-none d-flex me-1" id="nav-link" aria-current="page" href="/login">
-          <span class="material-icons" style="color: #d5d8dc">login</span>
-          <span class="tooltip-txt">Login</span>
-        </a>
-      </li>
+
+      <a
+        class="nav-link link-light active text-decoration-none d-flex me-1"
+        id="nav-link"
+        aria-current="page"
+        href="/login"
+      >
+        <span class="material-icons">login</span>
+        <span class="tooltip-txt">Login</span>
+      </a>
       <% } %>
-    </ul>
+    </div>
+    <!-- Right elements -->
   </div>
+  <!-- Container wrapper -->
 </nav>
+<!-- Navbar -->

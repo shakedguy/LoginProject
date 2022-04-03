@@ -1,17 +1,20 @@
 <% if(userData) { %>
 <section>
-  <div class="card align-self-center shadow bg-body rounded w-auto">
-    <img src="<%-userData.picture%>" class="card-img-top" alt="user photo" />
-
-    <div class="card-body text-start">
+  <div class="card align-self-center shadow bg-body rounded border-0" style="max-width: 25rem">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <img src="<%-userData.picture%>" class="card-img-top" alt="user photo" />
+      <a href="#!">
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+      </a>
+    </div>
+    <div class="card-body">
       <h5 class="card-title">Hello <%- userData.name || userData.email || "Undefined" %></h5>
-      <p class="card-text">
+      <p class="card-text text-start">
         <strong class="me-2">Your Email is:</strong> <%- userData.email || "Undefined" %><br />
         <strong class="me-2">Your Phone number is: </strong><%- userData.phoneNumber||"Undefined" %>
       </p>
     </div>
   </div>
-  <a class="btn btn-primary mb-0 mt-4" href="/messages">Messages Module</a>
 </section>
 
 <% } else { %>
@@ -22,12 +25,18 @@
 </div>
 
 <%}%> <% if(isAlreadyLogedIn) { %>
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="already-logged-toast" class="toast bg-secondary" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
+<div class="position-absolute bottom-0 end-0 p-2" style="z-index: 11">
+  <div
+    id="already-logged-toast"
+    class="toast text-light bg-danger"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header text-light bg-danger">
       <strong class="me-auto">New notification</strong>
       <small>Just Now</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body text-light" id="logged-toast-text">You have already logged in</div>
   </div>

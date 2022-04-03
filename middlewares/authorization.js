@@ -10,7 +10,8 @@ const authorization = (req, res, next) => {
       next();
     })
     .catch((error) => {
-      res.redirect('/login');
+      const redirect = req.baseUrl.includes('admin') ? '/admin/login' : '/login';
+      res.redirect(redirect);
     });
 };
 

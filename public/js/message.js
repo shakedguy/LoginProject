@@ -1,5 +1,7 @@
 const feedback = $('#message-feedback-id');
-const messageInput = $('#message-input');
+const messageInput = $('#message-input').first();
+const messageCont = $('#message');
+
 let message = '';
 export const onInputHandler = (event) => {
   message = event.target.value;
@@ -25,4 +27,5 @@ export const onMessageSwitchChangeHandler = (event) => {
     messageInput.attr('required', 'true');
     messageInput.addClass('is-invalid');
   }
+  messageCont.collapse('toggle');
 };

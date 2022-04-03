@@ -1,6 +1,7 @@
 export const datePicker = $('#datePicker');
 const scheduleFeedback = $('#schedule-feedback');
 export const scheduleSwitch = $('#schedule-switch');
+const scheduleCont = $('#schedule-collapse');
 
 export const onScheduledSwitchChangeHandler = (event) => {
   if (event.target.checked) {
@@ -10,6 +11,7 @@ export const onScheduledSwitchChangeHandler = (event) => {
     datePicker.attr('required', 'true');
     datePicker.addClass('is-invalid');
   }
+  scheduleCont.collapse('toggle');
 };
 
 export const dateTimeValidation = (dateTime) => {

@@ -20,6 +20,12 @@ app.use(xss());
 
 const globalMiddleware = app.all('*', (req, res, next) => {
   res.cookie('XSRF-TOKEN', req.csrfToken());
+  const idToken = req.cookies.idToken || null;
+  if (idToken) {
+    const expiresIn = process.env.NODE_ENV === 'development' ? 1000 * 60 * 60 * 24 : Number(process.env.EXPIRES_COOKIE);
+    res.cookie('idToken', idToken, { httpOnly: true, secure: true, expires: new Date(Date.now() + expiresIn) });
+  }
+
   next();
 });
 

@@ -8,5 +8,6 @@ exports.getProfilePage = (req, res) => {
     userData: req.userData,
     firebaseConfig,
     isAlreadyLogedIn: false,
+    admin: false,
   });
 };
