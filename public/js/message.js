@@ -22,6 +22,7 @@ export const onMessageSwitchChangeHandler = (event) => {
   if (event.target.checked) {
     messageInput.removeAttr('required');
     messageInput.removeClass('is-invalid');
+
     message = null;
   } else {
     messageInput.attr('required', 'true');

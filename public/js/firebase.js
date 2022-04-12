@@ -80,22 +80,21 @@ const uiConfig = {
   privacyPolicyUrl: 'https://www.google.com',
 };
 
-export const firebaseInit = () =>
-  $(window).ready(async () => {
-    const firebaseConfig = await getFirebaseConfig();
+export const firebaseInit = async () => {
+  const firebaseConfig = await getFirebaseConfig();
 
-    firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-    uiConfig.callbacks.uiShown = () => {
-      $('#loader').css('display', 'none');
-    };
+  uiConfig.callbacks.uiShown = () => {
+    $('#loader').css('display', 'none');
+  };
 
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.disableAutoSignIn();
-    const widget = $('#firebaseui-auth-container');
-    if (widget.length > 0) {
-      ui.start(widget[0], uiConfig);
-    }
-  });
+  const ui = new firebaseui.auth.AuthUI(firebase.auth());
+  ui.disableAutoSignIn();
+  const widget = $('#firebaseui-auth-container');
+  if (widget.length > 0) {
+    ui.start(widget[0], uiConfig);
+  }
+};

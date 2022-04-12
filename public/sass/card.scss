@@ -1,0 +1,11 @@
+.card,
+.card-body {
+	border-radius: 3px;
+}
+
+.card {
+	margin: 0 auto;
+	width: $width-card;
+	font-size: $font-size-small;
+	border-radius: 3px;
+}

@@ -2,7 +2,7 @@
   <div class="card align-self-center shadow bg-body rounded border-0" style="width: 30rem">
     <div class="card-body text-start">
       <h5 class="card-title text-center"><strong>Who do you want to send a message to?</strong></h5>
-      <form class="form mt-4 has-validation" novalidate id="message-form">
+      <form class="form mt-4 has-validation text-black" novalidate id="message-form">
         <%- include('./components/MailingList'); -%> <%- include('./components/Message'); -%> <%-
         include('./components/Schedule'); -%>
 
@@ -49,10 +49,10 @@
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
   <div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
+    <div class="toast-header text-light" id="message-toast-header">
       <strong class="me-auto">New notification</strong>
       <small>Just Now</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body text-light" id="toast-text"></div>
   </div>

@@ -91,8 +91,8 @@ exports.sendMessage = (req, res) => {
           .then((message) => console.log(message.sid))
           .done();
       });
-      res.end(JSON.stringify({ status: 'success' }));
     }
+    res.end(JSON.stringify({ status: 'success' }));
   } else {
     res.end(JSON.stringify({ status: 'Unauthorized, Admin only' }));
   }

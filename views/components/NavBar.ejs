@@ -1,72 +1,68 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Toggle button -->
-    <div class="d-flex">
-      <button
-        class="navbar-toggler menu-btn"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasWithBothOptions"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        id="btn-menu"
-        aria-controls="offcanvasWithBothOptions"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-      <a class="link-light ms-2" href="/" id="nav-btn-home" role="button" aria-expanded="false">
-        <i class="fas fa-home"></i>
-      </a>
-    </div>
-    <h2 id="main-title" style="font-weight: 600"><%- title %></h2>
-    <!-- Right elements -->
-    <div class="d-flex align-items-center">
-      <!-- Avatar -->
-      <a class="nav-link link-light active text-decoration-none d-flex" aria-current="page" href="/profile">
-        <%if(isLogedIn && userData && userData.picture){%>
-        <img
-          src="<%-userData.picture%>"
-          class="rounded-circle"
-          alt="user photo"
-          width="24"
-          height="24"
-          loading="lazy"
-        />
-        <%}else{%>
-        <span class="material-icons">account_circle</span>
-        <%}%>
-        <span class="tooltip-txt">Profile</span>
-      </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+	<!-- Container wrapper -->
+	<div class="container-fluid">
+		<!-- Toggle button -->
+		<div class="d-flex">
+			<button
+				class="navbar-toggler menu-btn"
+				type="button"
+				data-bs-toggle="offcanvas"
+				data-bs-target="#offcanvasWithBothOptions"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+				id="btn-menu"
+				aria-controls="offcanvasWithBothOptions"
+			>
+				<i class="fas fa-bars"></i>
+				<span class="tooltip-txt">Menu</span>
+			</button>
+			<a class="link-light ms-2" href="/" id="nav-btn-home" role="button" aria-expanded="false">
+				<i class="fas fa-home"></i>
+				<span class="tooltip-txt">Home</span>
+			</a>
+		</div>
+		<h2 id="main-title" style="font-weight: 600"><%- title %></h2>
+		<!-- Right elements -->
+		<div class="d-flex align-items-center">
+			<!-- Avatar -->
+			<a class="nav-link link-light active text-decoration-none d-flex" aria-current="page" href="/profile">
+				<%if(isLogedIn && userData && userData.picture){%>
+				<img
+					src="<%-userData.picture%>"
+					class="rounded-circle"
+					alt="user photo"
+					width="24"
+					height="24"
+					loading="lazy"
+				/>
+				<%}else{%>
+				<span class="material-icons">account_circle</span>
+				<%}%>
+				<span class="tooltip-txt">Profile</span>
+			</a>
 
-      <%if (isLogedIn) { %>
+			<%if (isLogedIn) { %>
 
-      <a
-        class="nav-link link-light active text-decoration-none d-flex me-1"
-        id="liveToastBtn"
-        id="nav-link"
-        aria-current="page"
-      >
-        <span class="material-icons">logout</span>
-        <span class="tooltip-txt">Logout</span>
-      </a>
+			<a class="nav-link link-light active text-decoration-none d-flex" id="logout-btn" aria-current="page">
+				<span class="material-icons">logout</span>
+				<span class="tooltip-txt">Logout</span>
+			</a>
 
-      <% }else{ %>
+			<% }else{ %>
 
-      <a
-        class="nav-link link-light active text-decoration-none d-flex me-1"
-        id="nav-link"
-        aria-current="page"
-        href="/login"
-      >
-        <span class="material-icons">login</span>
-        <span class="tooltip-txt">Login</span>
-      </a>
-      <% } %>
-    </div>
-    <!-- Right elements -->
-  </div>
-  <!-- Container wrapper -->
+			<a class="nav-link link-light active text-decoration-none d-flex" id="nav-link" aria-current="page" href="/login">
+				<span class="material-icons">login</span>
+				<span class="tooltip-txt">Login</span>
+			</a>
+			<% } %>
+			<button type="button" class="btn text-light menu-btn me-1" id="btn-dark-mode">
+				<i class="bi bi-moon"></i>
+				<span class="tooltip-txt" style="min-width: 75px">Dark Mode</span>
+			</button>
+		</div>
+		<!-- Right elements -->
+	</div>
+	<!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
