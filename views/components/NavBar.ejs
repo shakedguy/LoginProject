@@ -1,11 +1,11 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+<nav class="navbar navbar-dark bg-gradient">
 	<!-- Container wrapper -->
 	<div class="container-fluid">
 		<!-- Toggle button -->
 		<div class="d-flex">
 			<button
-				class="navbar-toggler menu-btn"
+				class="navbar-toggler menu-btn add-tooltip"
 				type="button"
 				data-bs-toggle="offcanvas"
 				data-bs-target="#offcanvasWithBothOptions"
@@ -13,20 +13,31 @@
 				aria-label="Toggle navigation"
 				id="btn-menu"
 				aria-controls="offcanvasWithBothOptions"
+				title="Menu"
 			>
 				<i class="fas fa-bars"></i>
-				<span class="tooltip-txt">Menu</span>
 			</button>
-			<a class="link-light ms-2" href="/" id="nav-btn-home" role="button" aria-expanded="false">
+			<a
+				class="link-light ms-2 add-tooltip"
+				href="/"
+				id="nav-btn-home"
+				role="button"
+				aria-expanded="false"
+				title="Home"
+			>
 				<i class="fas fa-home"></i>
-				<span class="tooltip-txt">Home</span>
 			</a>
 		</div>
 		<h2 id="main-title" style="font-weight: 600"><%- title %></h2>
 		<!-- Right elements -->
 		<div class="d-flex align-items-center">
 			<!-- Avatar -->
-			<a class="nav-link link-light active text-decoration-none d-flex" aria-current="page" href="/profile">
+			<a
+				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
+				aria-current="page"
+				href="/profile"
+				title="Profile"
+			>
 				<%if(isLogedIn && userData && userData.picture){%>
 				<img
 					src="<%-userData.picture%>"
@@ -37,32 +48,42 @@
 					loading="lazy"
 				/>
 				<%}else{%>
-				<span class="material-icons">account_circle</span>
+				<span class="material-icons add-tooltip" title="Profile">account_circle</span>
 				<%}%>
-				<span class="tooltip-txt">Profile</span>
 			</a>
 
 			<%if (isLogedIn) { %>
 
-			<a class="nav-link link-light active text-decoration-none d-flex" id="logout-btn" aria-current="page">
+			<a
+				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
+				type="button"
+				id="btn-logout-toast"
+				aria-current="page"
+				title="logout"
+			>
 				<span class="material-icons">logout</span>
-				<span class="tooltip-txt">Logout</span>
 			</a>
 
 			<% }else{ %>
 
-			<a class="nav-link link-light active text-decoration-none d-flex" id="nav-link" aria-current="page" href="/login">
+			<a
+				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
+				id="nav-link"
+				aria-current="page"
+				href="/login"
+				title="Login"
+			>
 				<span class="material-icons">login</span>
-				<span class="tooltip-txt">Login</span>
 			</a>
 			<% } %>
-			<button type="button" class="btn text-light menu-btn me-1" id="btn-dark-mode">
+			<button type="button" class="btn text-light menu-btn me-1 add-tooltip" id="btn-dark-mode" title="Dark Mode">
 				<i class="bi bi-moon"></i>
-				<span class="tooltip-txt" style="min-width: 75px">Dark Mode</span>
 			</button>
 		</div>
 		<!-- Right elements -->
 	</div>
 	<!-- Container wrapper -->
 </nav>
+
+<%- include('./Toast'); -%>
 <!-- Navbar -->

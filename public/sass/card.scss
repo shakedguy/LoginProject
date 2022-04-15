@@ -1,11 +1,16 @@
-.card,
-.card-body {
-	border-radius: 3px;
-}
-
 .card {
 	margin: 0 auto;
 	width: $width-card;
 	font-size: $font-size-small;
-	border-radius: 3px;
+	border-radius: 5px;
+	.card-body {
+		border-radius: 5px;
+	}
+}
+
+html[theme='dark'] {
+	.card,
+	.card-body {
+		background-color: $dark;
+	}
 }

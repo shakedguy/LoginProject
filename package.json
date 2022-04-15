@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "nodemon server.js",
-		"sass": "node-sass -w ./public/sass/main.scss -o ./public/css/main.css"
+		"sass": "node-sass -w ./public/sass/main.scss -o ./public/css"
 	},
 	"keywords": [],
 	"author": "",
@@ -31,7 +31,6 @@
 		"helmet": "^5.0.2",
 		"jquery": "^3.6.0",
 		"material-design-icons": "^3.0.1",
-		"mdb-ui-kit": "^3.11.0",
 		"morgan": "^1.10.0",
 		"ngrok": "^4.3.1",
 		"serve-favicon": "^2.5.0",

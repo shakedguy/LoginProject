@@ -1,11 +1,8 @@
 <% if(userData) { %>
 <section>
-	<div class="card align-self-center shadow bg-body rounded border-0" style="max-width: 25rem">
+	<div class="card align-self-center shadow rounded border-0 bg-gradient" style="max-width: 25rem">
 		<div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 			<img src="<%-userData.picture%>" class="card-img-top" alt="user photo" />
-			<a href="#!">
-				<div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
-			</a>
 		</div>
 		<div class="card-body bg-gradient">
 			<h5 class="card-title">Hello <%- userData.name || userData.email || "Undefined" %></h5>

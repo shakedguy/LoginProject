@@ -7834,10 +7834,6 @@ main {
   text-align: center;
   font-family: "Raleway", sans-serif; }
 
-h1, .h1, h2, .h2 {
-  font-family: "Poiret One", cursive;
-  color: #d5d8dc; }
-
 article header,
 div header,
 main header {
@@ -7855,15 +7851,53 @@ footer {
   left: 41.5%;
   font-size: 10px; }
 
-.card,
-.card-body {
-  border-radius: 3px; }
+#offcanvasWithBothOptions {
+  max-width: 20vw; }
+
+#main-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+header {
+  text-align: center; }
+  header a b,
+  header a em,
+  header a i,
+  header a strong {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem; }
+  header nav img {
+    margin: 1rem 0; }
+
+.mailing-list-containers {
+  padding: 0;
+  margin: 0; }
+
+html[theme='dark'] body {
+  background-color: #6c757d; }
+
+html[theme='dark'] nav {
+  background-color: #212529; }
+
+html[theme='dark'] #offcanvasWithBothOptions,
+html[theme='dark'] ul,
+html[theme='dark'] li {
+  background-color: #212529;
+  color: #f8f9fa; }
 
 .card {
   margin: 0 auto;
   width: 300px;
   font-size: 14px;
-  border-radius: 3px; }
+  border-radius: 5px; }
+  .card .card-body {
+    border-radius: 5px; }
+
+html[theme='dark'] .card,
+html[theme='dark'] .card-body {
+  background-color: #212529; }
 
 nav {
   background-color: #0d6efd;
@@ -7884,9 +7918,28 @@ nav {
   cursor: pointer;
   background: #ddd; }
 
+h1, .h1, h2, .h2 {
+  font-family: "Poiret One", cursive;
+  color: #d5d8dc; }
+
+html[theme='dark'] h1, html[theme='dark'] .h1,
+html[theme='dark'] h2,
+html[theme='dark'] .h2,
+html[theme='dark'] h3,
+html[theme='dark'] .h3,
+html[theme='dark'] h4,
+html[theme='dark'] .h4,
+html[theme='dark'] h5,
+html[theme='dark'] .h5,
+html[theme='dark'] h6,
+html[theme='dark'] .h6,
+html[theme='dark'] p {
+  color: #f8f9fa; }
+
 a {
   text-decoration: none;
-  width: fit-content; }
+  width: fit-content;
+  cursor: pointer; }
   a:hover {
     filter: brightness(1.2); }
 
@@ -7896,8 +7949,81 @@ button {
     cursor: pointer;
     filter: brightness(1.2); }
 
-#offcanvasWithBothOptions {
-  max-width: 20vw; }
+#btn-menu {
+  display: inherit;
+  margin: 0 5px; }
+
+.btn-toast {
+  width: 120px;
+  text-align: center; }
+
+html[theme='dark'] .paginate_button > a:hover {
+  background-color: #212529 !important;
+  color: #f8f9fa !important; }
+
+html[theme='dark'] #main-menu > li.nav-item.main-nav > a {
+  color: #f8f9fa; }
+
+html[theme='dark'] #main-menu > li.nav-item.main-nav:hover {
+  background-color: #6c757d; }
+
+#logout-toast,
+.toast-body,
+#toast-header {
+  background-color: #6c757d;
+  color: #f8f9fa;
+  border: none;
+  border-radius: 3px; }
+  #logout-toast #btn-cancel,
+  .toast-body #btn-cancel,
+  #toast-header #btn-cancel {
+    background-color: #f93154;
+    color: #f8f9fa;
+    border: none; }
+  #logout-toast #btn-logout,
+  .toast-body #btn-logout,
+  #toast-header #btn-logout {
+    background-color: #00b74a;
+    color: #f8f9fa;
+    border: none; }
+
+html[theme='dark'] #logout-toast,
+html[theme='dark'] .toast-body,
+html[theme='dark'] #toast-header {
+  background-color: #212529; }
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(-180deg); } }
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(-180deg); } }
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg); } }
+
+.table-text {
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
+
+.table-headers {
+  font-size: 12px; }
+
+html[theme='dark'] table,
+html[theme='dark'] tbody,
+html[theme='dark'] td,
+html[theme='dark'] th,
+html[theme='dark'] tr,
+html[theme='dark'] #dtBasic_filter > label > input,
+html[theme='dark'] .paginate_button > a {
+  background-color: #6c757d !important;
+  color: #f8f9fa !important; }
+
+html[theme='dark'] #dtBasic_filter > label {
+  color: #f8f9fa !important; }
 
 .arrow-forward {
   cursor: pointer;
@@ -7919,146 +8045,3 @@ button {
 
 .mailing-list-checkbox {
   width: 20px; }
-
-.table-text {
-  font-size: 11px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
-
-.table-headers {
-  font-size: 12px; }
-
-#main-spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
-
-header {
-  text-align: center; }
-  header a b,
-  header a em,
-  header a i,
-  header a strong {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem; }
-  header nav img {
-    margin: 1rem 0; }
-
-#test {
-  width: 100vw;
-  height: 5vh;
-  background-color: red; }
-
-#btn-menu {
-  display: inherit;
-  margin: 0 5px; }
-
-.mailing-list-containers {
-  padding: 0;
-  margin: 0; }
-
-a .tooltip-txt::after,
-button .tooltip-txt::after {
-  content: ' ';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #222 transparent; }
-
-.tooltip-txt {
-  visibility: hidden;
-  min-width: 55px;
-  min-height: 30px;
-  top: 100%;
-  left: 50%;
-  margin-left: -40px;
-  background-color: #222;
-  color: #ccc;
-  padding: 5px 0;
-  border-radius: 3px;
-  border-top: 1px dotted #222;
-  position: absolute;
-  z-index: 100;
-  font-size: 12px;
-  font-family: 'Raleway', sans-serif;
-  opacity: 0.9;
-  text-align: center;
-  text-justify: center;
-  overflow: visible; }
-
-.btn-toast {
-  width: 120px;
-  text-align: center; }
-
-#liveToastBtn {
-  cursor: pointer; }
-
-html[theme='dark'] h1, html[theme='dark'] .h1,
-html[theme='dark'] h2,
-html[theme='dark'] .h2,
-html[theme='dark'] h3,
-html[theme='dark'] .h3,
-html[theme='dark'] h4,
-html[theme='dark'] .h4,
-html[theme='dark'] h5,
-html[theme='dark'] .h5,
-html[theme='dark'] h6,
-html[theme='dark'] .h6,
-html[theme='dark'] p {
-  color: #f8f9fa; }
-
-html[theme='dark'] body {
-  background-color: #6c757d; }
-
-html[theme='dark'] nav {
-  background-color: #212529; }
-
-html[theme='dark'] .body,
-html[theme='dark'] .card,
-html[theme='dark'] .card-body {
-  background-color: #212529; }
-
-html[theme='dark'] table,
-html[theme='dark'] tbody,
-html[theme='dark'] td,
-html[theme='dark'] th,
-html[theme='dark'] tr,
-html[theme='dark'] #dtBasic_filter > label > input,
-html[theme='dark'] .paginate_button > a {
-  background-color: #6c757d !important;
-  color: #f8f9fa !important; }
-
-html[theme='dark'] .paginate_button > a:hover {
-  background-color: #212529 !important;
-  color: #f8f9fa !important; }
-
-html[theme='dark'] #dtBasic_filter > label {
-  color: #f8f9fa !important; }
-
-html[theme='dark'] #offcanvasWithBothOptions,
-html[theme='dark'] ul,
-html[theme='dark'] li {
-  background-color: #212529;
-  color: #f8f9fa; }
-
-html[theme='dark'] #main-menu > li.nav-item.main-nav > a {
-  color: #f8f9fa; }
-
-html[theme='dark'] #main-menu > li.nav-item.main-nav:hover {
-  background-color: #6c757d; }
-
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(-180deg); } }
-
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(-180deg); } }
-
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg); } }

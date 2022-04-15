@@ -1,0 +1,39 @@
+a {
+	text-decoration: none;
+	width: fit-content;
+	cursor: pointer;
+	&:hover {
+		filter: brightness($hover-brightness);
+	}
+}
+
+button {
+	font-family: $font-primary;
+	&:hover {
+		cursor: pointer;
+		filter: brightness($hover-brightness);
+	}
+}
+
+#btn-menu {
+	display: inherit;
+	margin: 0 5px;
+}
+
+.btn-toast {
+	width: 120px;
+	text-align: center;
+}
+
+html[theme='dark'] {
+	.paginate_button > a:hover {
+		background-color: $dark !important;
+		color: $light !important;
+	}
+	#main-menu > li.nav-item.main-nav > a {
+		color: $light;
+	}
+	#main-menu > li.nav-item.main-nav:hover {
+		background-color: $secondary;
+	}
+}

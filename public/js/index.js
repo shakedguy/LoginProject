@@ -6,6 +6,7 @@ import { getHtmlMessagesList } from './mailingList.js';
 import { onMessageSwitchChangeHandler, onInputHandler } from './message.js';
 import { dataTableInit } from './users.js';
 import { body, darkModeBtn, setDarkMode, setLightMode } from './helpers.js';
+import { tooltipsInit } from './tooltips.js';
 
 const toggleDarkMode = () => {
 	const darkMode = sessionStorage.getItem('theme') === 'dark';
@@ -50,6 +51,7 @@ $(window).ready(async () => {
 	await initMenu();
 	await firebaseInit();
 	initTheme();
+	tooltipsInit();
 	const location = window.location.pathname;
 
 	if (location.includes('messages')) {
@@ -65,9 +67,6 @@ $(window).ready(async () => {
 		scheduleSwitch.on('change', onScheduledSwitchChangeHandler);
 		$('#message-switch').change(onMessageSwitchChangeHandler);
 		$('#message-input').on('input', onInputHandler);
-		$('#sms').tooltip({ title: 'Send SMS', placement: 'bottom' });
-		$('#whatsapp').tooltip({ title: 'Send WhatsApp Message', placement: 'bottom' });
-		$('#email').tooltip({ title: 'Send Email', placement: 'bottom' });
 	} else if (location.includes('users')) {
 		dataTableInit();
 	} else if (location.includes('profile')) {
@@ -85,10 +84,11 @@ darkModeBtn.click(() => {
 	toggleDarkMode();
 });
 // logout toast
-$('#liveToastBtn').click(() => new bootstrap.Toast().show($('#liveToast')));
+
+$('#btn-logout-toast').click(() => new bootstrap.Toast($('#logout-toast')).show());
 
 // logout button
-$('#logout-btn').click(() => window.location.replace('/logout'));
+$('#btn-logout').click(() => window.location.replace('/logout'));
 
 if (canvas.length > 0) {
 	canvas.on('show.bs.offcanvas', () => {
