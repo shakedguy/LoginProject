@@ -1,7 +1,11 @@
 h1,
-h2 {
+h2,
+div > h1,
+div > h2 {
 	font-family: $font-titles;
 	color: $color-text-titles;
+	font-size: $font-size-title;
+	margin: auto;
 }
 
 html[theme='dark'] {
@@ -13,5 +17,11 @@ html[theme='dark'] {
 	h6,
 	p {
 		color: $light;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	#main-title {
+		font-size: $font-size-title-desktop;
 	}
 }

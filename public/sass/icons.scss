@@ -1,23 +1,39 @@
 .arrow-forward {
 	cursor: pointer;
-	-webkit-animation: spin 0.5s ease-out forwards;
-	-moz-animation: spin 0.5s ease-out forwards;
-	animation: spin 0.5s ease-out forwards;
+	-webkit-animation: spin 0.6s ease-out forwards;
+	-moz-animation: spin 0.6s ease-out forwards;
+	animation: spin 0.6s ease-out forwards;
 }
 
-.material-icons.md-18 {
-	font-size: 18px;
-}
-.material-icons.md-24 {
-	font-size: 24px;
-}
-.material-icons.md-36 {
-	font-size: 36px;
-}
-.material-icons.md-48 {
-	font-size: 48px;
+button,
+a {
+	i,
+	.fa,
+	.fas,
+	.bi,
+	.bi.bi-moon,
+	.bi::before,
+	.bi::after {
+		font-size: $icon-size-small;
+		margin: auto;
+		padding: 0;
+		align-self: center;
+		justify-self: center;
+	}
 }
 
-.mailing-list-checkbox {
-	width: 20px;
+@media screen and (min-width: 768px) {
+	button,
+	a,
+	.offcanvas-header {
+		i,
+		.fa,
+		.fas,
+		.bi,
+		.bi.bi-moon,
+		.bi::before,
+		.bi::after {
+			font-size: $icon-size-desktop;
+		}
+	}
 }

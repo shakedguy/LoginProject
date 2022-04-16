@@ -5,39 +5,27 @@
 		<!-- Toggle button -->
 		<div class="d-flex">
 			<button
-				class="navbar-toggler menu-btn add-tooltip"
+				class="navbar-toggler add-tooltip"
 				type="button"
 				data-bs-toggle="offcanvas"
-				data-bs-target="#offcanvasWithBothOptions"
+				data-bs-target="#main-menu-canvas"
 				aria-expanded="false"
 				aria-label="Toggle navigation"
 				id="btn-menu"
-				aria-controls="offcanvasWithBothOptions"
+				aria-controls="main-menu-canvas"
 				title="Menu"
 			>
-				<i class="fas fa-bars"></i>
+				<i class="bi bi-list"></i>
 			</button>
-			<a
-				class="link-light ms-2 add-tooltip"
-				href="/"
-				id="nav-btn-home"
-				role="button"
-				aria-expanded="false"
-				title="Home"
-			>
-				<i class="fas fa-home"></i>
+			<a class="link-light add-tooltip" href="/" id="nav-btn-home" role="button" aria-expanded="false" title="Home">
+				<i class="bi bi-house-door"></i>
 			</a>
 		</div>
 		<h2 id="main-title" style="font-weight: 600"><%- title %></h2>
 		<!-- Right elements -->
-		<div class="d-flex align-items-center">
+		<div class="d-flex align-items-center right-elements">
 			<!-- Avatar -->
-			<a
-				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
-				aria-current="page"
-				href="/profile"
-				title="Profile"
-			>
+			<a class="nav-link link-light active add-tooltip" aria-current="page" href="/profile" title="Profile">
 				<%if(isLogedIn && userData && userData.picture){%>
 				<img
 					src="<%-userData.picture%>"
@@ -48,37 +36,43 @@
 					loading="lazy"
 				/>
 				<%}else{%>
-				<span class="material-icons add-tooltip" title="Profile">account_circle</span>
+				<i class="bi bi-person-circle"></i>
 				<%}%>
 			</a>
 
 			<%if (isLogedIn) { %>
 
 			<a
-				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
+				class="nav-link link-light active text-decoration-none add-tooltip"
 				type="button"
 				id="btn-logout-toast"
 				aria-current="page"
 				title="logout"
 			>
-				<span class="material-icons">logout</span>
+				<i class="bi bi-box-arrow-right"></i>
 			</a>
 
 			<% }else{ %>
 
 			<a
-				class="nav-link link-light active text-decoration-none d-flex add-tooltip"
+				class="nav-link link-light active text-decoration-none add-tooltip"
 				id="nav-link"
+				type="button"
 				aria-current="page"
 				href="/login"
 				title="Login"
 			>
-				<span class="material-icons">login</span>
+				<i class="bi bi-box-arrow-in-left"></i>
 			</a>
 			<% } %>
-			<button type="button" class="btn text-light menu-btn me-1 add-tooltip" id="btn-dark-mode" title="Dark Mode">
+			<a
+				type="button"
+				class="nav-link link-light active text-decoration-none add-tooltip"
+				id="btn-dark-mode"
+				title="Dark Mode"
+			>
 				<i class="bi bi-moon"></i>
-			</button>
+			</a>
 		</div>
 		<!-- Right elements -->
 	</div>

@@ -8,6 +8,8 @@ import { dataTableInit } from './users.js';
 import { body, darkModeBtn, setDarkMode, setLightMode } from './helpers.js';
 import { tooltipsInit } from './tooltips.js';
 
+console.log(navigator.userAgent);
+
 const toggleDarkMode = () => {
 	const darkMode = sessionStorage.getItem('theme') === 'dark';
 	darkMode ? setLightMode() : setDarkMode();
@@ -59,7 +61,7 @@ $(window).ready(async () => {
 			.ready(async () => {
 				mainSpinner.css('visibility', 'hidden');
 				const contactList = await getHtmlMessagesList();
-				$('#mailing-list-spinner').first().css('visibility', 'hidden');
+				$('#mailing-list-spinner').first().addClass('d-none');
 				$('#contacts-list').first().append(contactList);
 			})
 			.submit(submitHandler);

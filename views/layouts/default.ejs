@@ -81,17 +81,8 @@
 		<!-- /My Custom JS -->
 
 		<!-- /Scripts -->
-		<meta name="color-scheme" content="light dark" />
 	</head>
 	<body>
-		<%- include('../components/MainMenu'); -%>
-
-		<main><%- body %></main>
-		<%- include('../components/Toast'); -%> <% if(title === 'Profile Page' || title === 'Messages Page') { %>
-		<footer>
-			<p><strong>*</strong>This page is private and protected</p>
-		</footer>
-		<% } %>
-		<footer></footer>
+		<%- include('../components/MainMenu'); -%> <%- body %> <%- include('../components/Toast'); -%>
 	</body>
 </html>

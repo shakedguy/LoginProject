@@ -1,16 +1,46 @@
 .card {
 	margin: 0 auto;
-	width: $width-card;
+	width: $width-card-small;
 	font-size: $font-size-small;
 	border-radius: 5px;
 	.card-body {
 		border-radius: 5px;
 	}
+	.card-body {
+		h5 {
+			font-size: $font-size-card-title;
+		}
+	}
+}
+#card-sender {
+	width: $width-card;
 }
 
+#card-table {
+	width: $width-card;
+}
 html[theme='dark'] {
 	.card,
 	.card-body {
 		background-color: $dark;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.card {
+		width: $width-card;
+		font-size: $font-size-card-desktop;
+		.card-body {
+			h5 {
+				font-size: $font-size-title;
+			}
+		}
+	}
+	#card-sender {
+		width: $width-card-desktop;
+		font-size: $font-size-card-desktop;
+	}
+	#card-table {
+		width: $width-card-desktop;
 	}
 }

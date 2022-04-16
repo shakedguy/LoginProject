@@ -1,11 +1,11 @@
 .table-text {
-	font-size: 11px;
+	font-size: 8px;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
 		'Helvetica Neue', sans-serif;
 }
 
 .table-headers {
-	font-size: 12px;
+	font-size: 10px;
 }
 
 html[theme='dark'] {
@@ -16,10 +16,23 @@ html[theme='dark'] {
 	tr,
 	#dtBasic_filter > label > input,
 	.paginate_button > a {
-		background-color: $secondary !important;
+		background-color: $active-nav-dark !important;
 		color: $light !important;
 	}
 	#dtBasic_filter > label {
 		color: $light !important;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.table-text {
+		font-size: 11px;
+	}
+
+	.table-headers {
+		font-size: 13px;
+	}
+	#dtBasic_filter > label {
+		font-size: $font-size-card-desktop;
 	}
 }

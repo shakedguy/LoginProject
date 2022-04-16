@@ -18,10 +18,10 @@ const changeActive = () => {
 	const links = $('.main-nav-link');
 	links.toArray().forEach((link, index) => {
 		if (mainTitle.text().includes(link.innerHTML)) {
-			items[index].classList.add('bg-primary');
+			items[index].classList.add('main-nav-active');
 			link.classList.add('text-light');
 		} else {
-			items[index].classList.remove('bg-primary');
+			items[index].classList.remove('main-nav-active');
 			link.classList.remove('text-light');
 		}
 	});
@@ -37,7 +37,9 @@ const initMenu = async () => {
 			} else {
 				href = '/admin/login';
 			}
-			const li = $('<li class="nav-item main-nav rounded-1 d-flex justify-content-center" z-index="10"></li>');
+			const li = $(
+				'<li class="nav-item main-nav rounded-1 d-flex justify-content-center bg-gradient" z-index="10"></li>'
+			);
 			li.click(() => {
 				window.location.assign(href);
 				changeActive;

@@ -1,18 +1,57 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
+// Colors
 $bg-warning: #ffa900;
+$hover-brightness: 1.2;
+$color-text-titles: #d5d8dc;
+$bg-danger: #f93154;
+$bg-success: #00b74a;
+$text-dark: #333;
+$text-light: #ddd;
+$active-nav-dark: rgba(0, 58, 117, 0.6);
+//rgba(10, 25, 41, 0.7);
+//rgba(0, 58, 117, 0.2)
+//rgba(0, 58, 117, 0.2)
+
+//font-family
 $font-primary: 'Raleway', sans-serif;
 $font-secodary: 'Dosis', sans-serif;
 $font-titles: 'Poiret One', cursive;
+
+//font-size
+$font-size-small: 10px;
+$font-size: 12px;
+$font-size-card-title: 14px;
+$font-size-card-desktop: 13px;
+$font-size-big: 16px;
+$font-size-title: 22px;
+$font-size-title-desktop: 26px;
 $line-height: 150%;
-$font-size: 16px;
-$hover-brightness: 1.2;
-$color-text-titles: #d5d8dc;
-$font-size-small: 14px;
-$width-card: 300px;
+
+//icons
+$icon-size-small: 14px;
+$icon-size: 16px;
+$icon-size-desktop: 20px;
+
+//layout
+$width-card: 18rem;
+$width-card-small: 200px;
+$width-card-middle: 23rem;
+$width-card-desktop: 30rem;
 $width-content: 1080px;
-$bg-danger: #f93154;
-$bg-success: #00b74a;
+$width-content-small: 800px;
+
+//navbar
+$navbar-padding: 8px 8px;
+$navbar-padding-small: 4px 2px;
+$nav-margin-bottom: 1rem;
+$nav-margin-bottom-desktop: 5px;
+$nav-height: 8vh;
+$nav-height-desktop: 10vh;
+
+//menu
+$menu-width: 30vw;
+$menu-width-desktop: 20vw;
 
 html.transition,
 html.transition *,
@@ -35,34 +74,48 @@ footer,
 header,
 main {
 	margin: auto;
-	max-width: $width-content;
-	padding: auto;
+	max-width: 100vw;
+	max-height: 100vh;
+	padding: 1.5rem 1rem;
 	text-align: center;
 	font-family: $font-primary;
-}
-
-article header,
-div header,
-main header {
-	padding-top: 0;
-}
-
-section {
-	margin: 1rem 1.5rem;
-	padding: 0.5rem;
 }
 
 footer {
 	font-family: $font-secodary;
 	padding: 0;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
-	left: 41.5%;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
 	font-size: 10px;
+	p {
+		margin: 0;
+		padding: 0;
+		font-size: $font-size-small;
+	}
 }
 
-#offcanvasWithBothOptions {
-	max-width: 20vw;
+#firebaseui-auth-container {
+	background-color: transparent;
+	.firebaseui-card-content {
+		background-color: transparent;
+		form {
+			background-color: transparent;
+			ul {
+				background-color: transparent;
+				li {
+					background-color: transparent;
+				}
+			}
+		}
+	}
+}
+
+#main-menu-canvas {
+	max-width: $menu-width;
 }
 
 #main-spinner {
@@ -72,39 +125,36 @@ footer {
 	transform: translate(-50%, -50%);
 }
 
-header {
-	text-align: center;
-	a b,
-	a em,
-	a i,
-	a strong {
-		margin-left: 0.5rem;
-		margin-right: 0.5rem;
-	}
-	nav img {
-		margin: 1rem 0;
-	}
-}
-
 .mailing-list-containers {
 	padding: 0;
 	margin: 0;
 }
 
 html[theme='dark'] {
-	body {
+	body,
+	.offcanvas-header {
 		background-color: $secondary;
 	}
 	nav {
 		background-color: $dark;
 	}
-	#offcanvasWithBothOptions,
+	#main-menu-canvas,
 	ul,
 	li {
 		background-color: $dark;
 		color: $light;
 	}
 }
+
+@media screen and (min-width: 768px) {
+	#main-menu-canvas {
+		max-width: $menu-width-desktop;
+	}
+	footer > p {
+		font-size: $font-size;
+	}
+}
+
 @import './card.scss';
 @import './navbar.scss';
 @import './text.scss';

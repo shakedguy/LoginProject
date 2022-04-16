@@ -1,3 +1,5 @@
 export const tooltipsInit = () => {
-	$('.add-tooltip').tooltip({ placement: 'bottom', trigger: 'hover' });
+	if (window.matchMedia('only screen and (min-width: 768px)').matches) {
+		$('.add-tooltip').tooltip({ placement: 'bottom', trigger: 'hover' });
+	}
 };

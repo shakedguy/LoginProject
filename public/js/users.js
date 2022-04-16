@@ -13,6 +13,7 @@ export const dataTableInit = () => {
 		},
 		pageLength: 5,
 		colReorder: true,
+		scrollX: true,
 		buttons: {
 			buttons: [
 				{

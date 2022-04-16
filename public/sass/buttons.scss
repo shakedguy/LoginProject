@@ -1,6 +1,20 @@
-a {
-	text-decoration: none;
+a,
+button {
+	font-size: $font-size;
+}
+
+a,
+.right-elements > a,
+.right-elements > button {
 	width: fit-content;
+	height: fit-content;
+	text-decoration: none;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+	padding: 5px 8px;
+	margin: auto;
 	cursor: pointer;
 	&:hover {
 		filter: brightness($hover-brightness);
@@ -9,15 +23,25 @@ a {
 
 button {
 	font-family: $font-primary;
+	align-content: center;
+	justify-content: center;
 	&:hover {
 		cursor: pointer;
 		filter: brightness($hover-brightness);
 	}
 }
 
+#login-button {
+	border: none;
+	margin: 1rem auto;
+}
+
 #btn-menu {
 	display: inherit;
-	margin: 0 5px;
+	padding: 0px 10px;
+	i {
+		font-size: $icon-size;
+	}
 }
 
 .btn-toast {
@@ -25,7 +49,17 @@ button {
 	text-align: center;
 }
 
+#email,
+#whatsapp,
+#sms {
+	min-width: 4rem;
+}
+
 html[theme='dark'] {
+	#login-button {
+		background-color: $active-nav-dark;
+	}
+
 	.paginate_button > a:hover {
 		background-color: $dark !important;
 		color: $light !important;
@@ -35,5 +69,17 @@ html[theme='dark'] {
 	}
 	#main-menu > li.nav-item.main-nav:hover {
 		background-color: $secondary;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	a,
+	button {
+		font-size: $font-size-big;
+	}
+	#email,
+	#whatsapp,
+	#sms {
+		min-width: 6rem;
 	}
 }

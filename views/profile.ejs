@@ -1,6 +1,6 @@
 <% if(userData) { %>
-<section>
-	<div class="card align-self-center shadow rounded border-0 bg-gradient" style="max-width: 25rem">
+<main>
+	<div class="card align-self-center shadow rounded border-0 bg-gradient">
 		<div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 			<img src="<%-userData.picture%>" class="card-img-top" alt="user photo" />
 		</div>
@@ -12,7 +12,7 @@
 			</p>
 		</div>
 	</div>
-</section>
+</main>
 
 <% } else { %>
 <div class="d-flex justify-content-center" style="width: 5rem; height: 5rem">
@@ -39,3 +39,7 @@
 	</div>
 </div>
 <% } %>
+
+<footer>
+	<p><strong>*</strong>This page is private and protected</p>
+</footer>

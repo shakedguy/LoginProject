@@ -1,6 +1,8 @@
 nav {
 	background-color: $primary;
 	z-index: 1;
+	height: $nav-height;
+	margin-bottom: $nav-margin-bottom;
 
 	ul {
 		list-style: none;
@@ -9,18 +11,50 @@ nav {
 			display: inline-block;
 			position: relative;
 			text-align: left;
-			padding: 0.2rem 0;
+			padding: 0;
 		}
+	}
+}
+.right-elements {
+	a,
+	button,
+	i {
+		padding: $navbar-padding-small;
+		margin: auto;
+	}
+}
+
+.navbar-nav {
+	li {
+		margin: 5px 0;
 	}
 }
 
 .main-nav {
 	.nav-link {
-		color: #333;
+		color: $text-dark;
 	}
 
 	&:hover {
 		cursor: pointer;
-		background: #ddd;
+		background: $text-light;
+	}
+}
+.main-nav-active {
+	background-color: $primary;
+}
+
+html[theme='dark'] {
+	.main-nav {
+		background-color: $secondary;
+	}
+	.main-nav-active {
+		background-color: $active-nav-dark;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	nav {
+		height: $nav-height-desktop;
 	}
 }
