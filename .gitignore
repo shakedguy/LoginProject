@@ -1,5 +1,4 @@
 node_modules/
 *.env
 *.key
-public/sass
-certificates
+certificates/
