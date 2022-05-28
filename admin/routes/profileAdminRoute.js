@@ -1,11 +1,13 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-const { getProfilePage } = require(path.join(__dirname, '..', '..', 'controllers', 'profileController'));
+import express from 'express';
+import authorizationMiddleware from '../../middlewares/authorization.js';
+import userDataCookieMiddleware from '../../middlewares/userDataCookie.js';
+import { getProfilePage } from '../../controllers/profileController.js';
 
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'authorization.js')));
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'userDataCookie.js')));
+const profileAdminRoute = express.Router();
 
-router.route('/').get(getProfilePage);
+profileAdminRoute.use(authorizationMiddleware);
+profileAdminRoute.use(userDataCookieMiddleware);
 
-module.exports = router;
+profileAdminRoute.route('/').get(getProfilePage);
+
+export default profileAdminRoute;

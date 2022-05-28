@@ -2,9 +2,8 @@
 import { uiConfig } from './helpers.js';
 
 const getFirebaseConfig = async () => {
-	const responseJson = await fetch('/api/firebase');
-	const response = JSON.parse(await responseJson.text());
-	return response.data.firebaseConfig;
+	const response = await axios.get('/api/firebase');
+	return response.data;
 };
 
 export const firebaseInit = async () => {

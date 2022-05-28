@@ -1,18 +1,16 @@
-const admin = require('firebase-admin');
-
-const authorization = (req, res, next) => {
-  const sessionCookie = req.cookies.idToken || '';
-  admin
-    .auth()
-    .verifySessionCookie(sessionCookie, true)
-    .then((userData) => {
-      req.userData = userData;
-      next();
-    })
-    .catch((error) => {
-      const redirect = req.baseUrl.includes('admin') ? '/admin/login' : '/login';
-      res.redirect(redirect);
-    });
+import admin from 'firebase-admin';
+import User from '../models/User.js';
+const authorizationMiddleware = async (req, res, next) => {
+	const sessionCookie = req.cookies.idToken || '';
+	try {
+		const userData = await admin.auth().verifySessionCookie(sessionCookie, true);
+		const user = await admin.auth().getUser(userData.uid);
+		req.userData = User.fromFirebase(user);
+		next();
+	} catch (error) {
+		const redirect = req.baseUrl.includes('admin') ? '/admin/login' : '/login';
+		res.redirect(redirect);
+	}
 };
 
-module.exports = authorization;
+export default authorizationMiddleware;

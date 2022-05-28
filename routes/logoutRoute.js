@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
-const { logout } = require(path.join(__dirname, '..', 'controllers', 'logoutController.js'));
+import express from 'express';
+import { logout } from '../controllers/logoutController.js';
+const logoutRoute = express.Router();
 
-router.route('/').get(logout);
+logoutRoute.route('/').get(logout);
 
-module.exports = router;
+export default logoutRoute;

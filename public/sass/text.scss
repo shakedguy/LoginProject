@@ -20,6 +20,10 @@ html[theme='dark'] {
 	}
 }
 
+.profile-item {
+	font-weight: bolder;
+}
+
 @media screen and (min-width: 768px) {
 	#main-title {
 		font-size: $font-size-title-desktop;

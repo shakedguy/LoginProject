@@ -1,7 +1,5 @@
-const express = require('express');
-const admin = require('firebase-admin');
-const helmet = require('helmet');
-const xss = require('xss-clean');
+import express from 'express';
+import helmet from 'helmet';
 
 const app = express();
 
@@ -17,7 +15,6 @@ app.use(helmet.originAgentCluster());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
-app.use(xss());
 
 const globalMiddleware = app.all('*', (req, res, next) => {
 	res.cookie('XSRF-TOKEN', req.csrfToken());
@@ -31,4 +28,4 @@ const globalMiddleware = app.all('*', (req, res, next) => {
 	next();
 });
 
-module.exports = globalMiddleware;
+export default globalMiddleware;

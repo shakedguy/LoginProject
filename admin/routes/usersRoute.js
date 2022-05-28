@@ -1,11 +1,12 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-const { getAllUsers, getUser } = require(path.join(__dirname, '..', 'controllers', 'usersController.js'));
+import express from 'express';
+import authorizationMiddleware from '../../middlewares/authorization.js';
+import userDataCookieMiddleware from '../../middlewares/userDataCookie.js';
+import { getAllUsers } from '../controllers/usersController.js';
+const usersRoute = express.Router();
 
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'authorization.js')));
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'userDataCookie.js')));
+usersRoute.use(authorizationMiddleware);
+usersRoute.use(userDataCookieMiddleware);
 
-router.route('/').get(getAllUsers);
+usersRoute.route('/').get(getAllUsers);
 
-module.exports = router;
+export default usersRoute;

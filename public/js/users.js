@@ -1,8 +1,7 @@
 /* eslint-disable */
 export const getUsers = async () => {
-	const responseJson = await fetch('/admin/api/contacts');
-	const response = await responseJson.json();
-	return response.data.contacts;
+	const response = await axios.get('/admin/api/contacts');
+	return response.data;
 };
 
 export const dataTableInit = () => {

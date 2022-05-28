@@ -1,17 +1,17 @@
-const path = require('path');
+import { firebaseConfig } from '../utils/firebaseConfigs.js';
 
-const firebaseConfig = require(path.join(__dirname, '..', 'utils', 'firebaseConfigs.js'));
+const getErrorPage = (req, res) => {
+	const sessionCookie = req.cookies.idToken || null;
+	const isLogedIn = sessionCookie ? true : false;
+	const userData = req.cookies.userData || null;
 
-exports.getErrorPage = (req, res) => {
-  const sessionCookie = req.cookies.idToken || null;
-  const isLogedIn = sessionCookie ? true : false;
-  const userData = req.cookies.userData || null;
-
-  res.render('error', {
-    title: 'Error Page',
-    message: 'Page not found',
-    isLogedIn,
-    firebaseConfig,
-    userData,
-  });
+	res.render('error', {
+		title: 'Error Page',
+		message: 'Page not found',
+		isLogedIn,
+		firebaseConfig,
+		userData,
+	});
 };
+
+export { getErrorPage };

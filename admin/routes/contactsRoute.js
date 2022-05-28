@@ -1,11 +1,12 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-const { fetchContact, getAllContacts } = require(path.join(__dirname, '..', 'controllers', 'contactsController.js'));
+import express from 'express';
+import { getAllContacts } from '../controllers/contactsController.js';
+import authorizationMiddleware from '../../middlewares/authorization.js';
+import userDataCookieMiddleware from '../../middlewares/userDataCookie.js';
+const contactsRoute = express.Router();
 
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'authorization.js')));
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'userDataCookie.js')));
+contactsRoute.use(authorizationMiddleware);
+contactsRoute.use(userDataCookieMiddleware);
 
-router.route('/').get(getAllContacts);
+contactsRoute.route('/').get(getAllContacts);
 
-module.exports = router;
+export default contactsRoute;

@@ -1,9 +1,8 @@
-const express = require('express');
-const path = require('path');
-const { getFirebaseConfig } = require(path.join(__dirname, '..', 'controllers', 'firebaseController.js'));
+import express from 'express';
+import { getFirebaseConfig } from '../controllers/firebaseController.js';
 
-const router = express.Router();
+const firebaseRoute = express.Router();
 
-router.route('/').get(getFirebaseConfig);
+firebaseRoute.route('/').get(getFirebaseConfig);
 
-module.exports = router;
+export default firebaseRoute;

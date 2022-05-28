@@ -8,8 +8,6 @@ import { dataTableInit } from './users.js';
 import { body, darkModeBtn, setDarkMode, setLightMode } from './helpers.js';
 import { tooltipsInit } from './tooltips.js';
 
-console.log(navigator.userAgent);
-
 const toggleDarkMode = () => {
 	const darkMode = sessionStorage.getItem('theme') === 'dark';
 	darkMode ? setLightMode() : setDarkMode();

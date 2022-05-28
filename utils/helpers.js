@@ -1,6 +1,6 @@
-const { getAuth } = require('firebase-admin/auth');
-const admin = require('firebase-admin');
-exports.getContacts = (db) => {
+import admin from 'firebase-admin';
+
+const getContacts = (db) => {
 	const contacts = [];
 	db.forEach((contact, index) => {
 		contacts.push({
@@ -14,7 +14,7 @@ exports.getContacts = (db) => {
 	return contacts;
 };
 
-exports.getUsers = (db) => {
+const getUsers = (db) => {
 	if (db) {
 		const users = [];
 		db.forEach((user) => users.push(user));
@@ -27,8 +27,9 @@ const db = admin.database();
 const ref = db.ref('/');
 let admins = [];
 
-exports.updateUsersDatabase = async (usersRef, nextPageToken) => {
-	getAuth()
+const updateUsersDatabase = async (usersRef, nextPageToken) => {
+	admin
+		.auth()
 		.listUsers(1000, nextPageToken)
 		.then(async (listUsersResult) => {
 			const newUsers = listUsersResult.users.map((userRecord) => {
@@ -75,3 +76,5 @@ exports.updateUsersDatabase = async (usersRef, nextPageToken) => {
 			console.log('Error listing users:', error);
 		});
 };
+
+export { getContacts, getUsers, updateUsersDatabase };

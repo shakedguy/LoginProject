@@ -1,12 +1,5 @@
-const path = require('path');
+import { firebaseConfig } from '../utils/firebaseConfigs.js';
 
-const firebaseConfig = require(path.join(__dirname, '..', 'utils', 'firebaseConfigs.js'));
-
-exports.getFirebaseConfig = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      firebaseConfig,
-    },
-  });
+export const getFirebaseConfig = (req, res) => {
+	res.status(200).json(firebaseConfig);
 };

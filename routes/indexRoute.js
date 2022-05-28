@@ -1,10 +1,10 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-const { getHomePage } = require(path.join(__dirname, '..', 'controllers', 'homeController.js'));
+import express from 'express';
 
-router.route('/').get(getHomePage);
+const indexRoute = express.Router();
+import { getHomePage } from '../controllers/homeController.js';
 
-router.route('/home').get((req, res) => res.redirect('/'));
+indexRoute.route('/').get(getHomePage);
 
-module.exports = router;
+indexRoute.route('/home').get((req, res) => res.redirect('/'));
+
+export default indexRoute;

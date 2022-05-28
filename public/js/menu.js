@@ -7,8 +7,7 @@ export const menuBtn = $('#btn-menu');
 const isAdmin = window.location.pathname.includes('admin');
 const getMenuItems = async () => {
 	const url = isAdmin ? '/admin' : '';
-	const jsonResponse = await fetch(url + '/api/menu');
-	const response = await jsonResponse.json();
+	const response = await axios.get(url + '/api/menu');
 	return response.data;
 };
 let menu;

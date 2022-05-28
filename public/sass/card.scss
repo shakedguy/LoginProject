@@ -10,8 +10,13 @@
 		h5 {
 			font-size: $font-size-card-title;
 		}
+		.card-text,
+		ul {
+			text-decoration: none;
+		}
 	}
 }
+
 #card-sender {
 	width: $width-card;
 }
@@ -28,7 +33,7 @@ html[theme='dark'] {
 
 @media screen and (min-width: 768px) {
 	.card {
-		width: $width-card;
+		width: $width-card-desktop;
 		font-size: $font-size-card-desktop;
 		.card-body {
 			h5 {

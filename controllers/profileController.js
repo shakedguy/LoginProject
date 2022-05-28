@@ -1,13 +1,14 @@
-const path = require('path');
+import { firebaseConfig } from '../utils/firebaseConfigs.js';
 
-const firebaseConfig = require(path.join(__dirname, '..', 'utils', 'firebaseConfigs.js'));
-exports.getProfilePage = (req, res) => {
-  res.render('profile', {
-    title: 'Profile Page',
-    isLogedIn: true,
-    userData: req.userData,
-    firebaseConfig,
-    isAlreadyLogedIn: false,
-    admin: false,
-  });
+const getProfilePage = (req, res) => {
+	res.render('profile', {
+		title: 'Profile Page',
+		isLogedIn: true,
+		userData: req.userData,
+		firebaseConfig,
+		isAlreadyLogedIn: false,
+		admin: false,
+	});
 };
+
+export { getProfilePage };

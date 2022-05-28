@@ -1,18 +1,15 @@
-const express = require('express');
-const path = require('path');
-const router = express.Router();
-const { getSenderPage, prepareMessages, sendMessage, receivingMessages, handler } = require(path.join(
-  __dirname,
-  '..',
-  'controllers',
-  'messagesController.js'
-));
+import express from 'express';
+import { getSenderPage, prepareMessages, sendMessage } from '../controllers/messagesController.js';
+import authorizationMiddleware from '../../middlewares/authorization.js';
+import userDataCookieMiddleware from '../../middlewares/userDataCookie.js';
 
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'authorization.js')));
-router.use(require(path.join(__dirname, '..', '..', 'middlewares', 'userDataCookie.js')));
+const messagesRoute = express.Router();
 
-router.route('/').get(getSenderPage);
-router.route('/:via').post(prepareMessages, sendMessage);
+messagesRoute.use(authorizationMiddleware);
+messagesRoute.use(userDataCookieMiddleware);
 
-router.route('/receive').all(receivingMessages);
-module.exports = router;
+messagesRoute.route('/').get(getSenderPage);
+messagesRoute.route('/:via').post(prepareMessages, sendMessage);
+
+// messagesRoute.route('/receive').all(receivingMessages);
+export default messagesRoute;

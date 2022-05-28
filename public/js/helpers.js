@@ -43,23 +43,25 @@ const signInOptions = [
 	},
 ];
 
-const postIdTokenToSessionLogin = (url, idToken, displayName, email, phoneNumber, photoURL) => {
-	return fetch(url, {
-		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-			'CSRF-Token': Cookies.get('XSRF-TOKEN'),
-		},
-		body: JSON.stringify({ idToken, displayName, email, phoneNumber, photoURL }),
-	});
+const postIdTokenToSessionLogin = (url, idToken) => {
+	return axios.post(
+		url,
+		{ idToken },
+		{
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'CSRF-Token': Cookies.get('XSRF-TOKEN'),
+			},
+		}
+	);
 };
 
 const signInSuccess = (user, credential, redirectUrl) => {
 	user.getIdToken().then((idToken) => {
 		const isAdmin = window.location.pathname.includes('admin');
 		const url = isAdmin ? '/admin/login' : '/login';
-		return postIdTokenToSessionLogin(url, idToken, user.displayName, user.email, user.phoneNumber, user.photoURL).then(
+		return postIdTokenToSessionLogin(url, idToken).then(
 			(response) => {
 				if (response.status === 200) {
 					let name = user.email || user.phoneNumber;
@@ -67,18 +69,16 @@ const signInSuccess = (user, credential, redirectUrl) => {
 						name = user.displayName.replaceAll(' ', '');
 					}
 					const redirect = isAdmin ? '/admin' : '';
-					window.location.assign(`${redirect}/profile?username=${name || user.email || user.phoneNumber}`);
+					return window.location.assign(`${redirect}/profile?username=${name || user.email || user.phoneNumber}`);
 				} else {
-					window.location.assign('/error');
+					return window.location.assign('/error');
 				}
 			},
 			(error) => {
-				window.location.assign('/error');
+				return window.location.assign('/error');
 			}
 		);
 	});
-
-	return false;
 };
 
 export const uiConfig = {

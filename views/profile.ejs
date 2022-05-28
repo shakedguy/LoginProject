@@ -2,13 +2,18 @@
 <main>
 	<div class="card align-self-center shadow rounded border-0 bg-gradient">
 		<div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-			<img src="<%-userData.picture%>" class="card-img-top" alt="user photo" />
+			<img src="<%-userData.PhotoURL%>" class="card-img-top" alt="user photo" />
 		</div>
 		<div class="card-body bg-gradient">
-			<h5 class="card-title">Hello <%- userData.name || userData.email || "Undefined" %></h5>
+			<h5 class="card-title">Hello <%- userData.Name || userData.Email || userData.PhoneNumber || "Undefined" %></h5>
 			<p class="card-text text-start">
-				<strong class="me-2">Your Email is:</strong> <%- userData.email || "Undefined" %><br />
-				<strong class="me-2">Your Phone number is: </strong><%- userData.phoneNumber||"Undefined" %>
+				<ul class='list-group text-start border-0'>
+					<li class='list-group-item border-0'><strong class="me-2 profile-item">Email:</strong> <%- " "+userData.Email || "Undefined" %></li>
+					<li class='list-group-item border-0'><strong class="me-2 profile-item">Phone number: </strong><%- " "+userData.PhoneNumber||"Undefined" %></li>
+					<li class='list-group-item border-0'><strong class="me-2 profile-item">Creation Time: </strong><%- " "+userData.CreationTime||"Undefined" %></li>
+					<li class='list-group-item border-0'><strong class="me-2 profile-item">Last Login: </strong><%- " "+userData.LastLogin||"Undefined" %></li>
+					<li class='list-group-item border-0'><strong class="me-2 profile-item">Provider: </strong><%- " "+userData.Provider||"Undefined" %></li>
+				</ul>
 			</p>
 		</div>
 	</div>
