@@ -66,14 +66,12 @@ const User = class {
 
 	static fromFirebase(user) {
 		const providerData = user.providerData.find((obj) => obj.hasOwnProperty('providerId'));
-		console.log(user);
 		const name = user.displayName || providerData.displayName || 'undefined';
 		const email = user.email || providerData.email || 'undefined';
 		const phoneNumber = user.phoneNumber || providerData.phoneNumber || user.phoneNumber || 'undefined';
 		const photoURL = user.photoURL || providerData.photoURL || null;
 		const provider = providerData ? providerData.providerId : 'undefined';
-		const metadata = user.metadata.UserMetadata || 'undefined';
-
+		const metadata = user.metadata || 'undefined';
 		return new User(user.uid, name, email, phoneNumber, photoURL, provider, metadata);
 	}
 

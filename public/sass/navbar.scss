@@ -21,6 +21,11 @@ nav {
 	i {
 		padding: $navbar-padding-small;
 		margin: auto;
+		background-color: transparent;
+		border: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 	}
 }
 

@@ -13,9 +13,9 @@ import loginRoute from './routes/loginRoute.js';
 import logoutRoute from './routes/logoutRoute.js';
 import profileRoute from './routes/profileRoute.js';
 import menuRoute from './routes/menuRoute.js';
-import mobileLoginRoute from './routes/mobileLoginRoute.js';
 import errorRoute from './routes/errorRoute.js';
 import adminApp from './admin/adminApp.js';
+import mobileApi from './mobile/mobile.js';
 
 const defaultLayout = new URL('./views/layouts/default.ejs', import.meta.url).pathname;
 const staticFolder = new URL('./public/', import.meta.url).pathname;
@@ -36,10 +36,10 @@ const app = express();
 // });
 
 app.use(express.json());
-
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(mobileApi);
 
 // (async function () {
 //   const url = await ngrok.connect({
@@ -67,6 +67,7 @@ app.use(bodyParser.json());
 // 	res.writeHead(200, { 'Content-Type': 'text/xml' });
 // 	res.end(twiml.toString());
 // });
+
 app.use(csurf({ cookie: true }));
 app.use(globalMiddleware);
 app.use(expressEjsLayouts);
@@ -78,7 +79,6 @@ app.use('/logout', logoutRoute);
 app.use('/profile', profileRoute);
 app.use('/api/firebase', firebaseRoute);
 app.use('/api/menu', menuRoute);
-app.use('api/mobile/login', mobileLoginRoute);
 app.use(express.static(staticFolder));
 app.use('/css', express.static(staticCss));
 app.use('/js', express.static(staticJs));

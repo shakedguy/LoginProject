@@ -7823,7 +7823,10 @@ body {
   margin: 0;
   overflow-x: hidden;
   padding: 0;
-  font-size: 12px; }
+  font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
 
 footer,
 header,
@@ -7950,7 +7953,12 @@ nav {
 .right-elements button,
 .right-elements i {
   padding: 4px 2px;
-  margin: auto; }
+  margin: auto;
+  background-color: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
 
 .navbar-nav li {
   margin: 5px 0; }

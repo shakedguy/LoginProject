@@ -58,7 +58,7 @@ const mobileLogin = async (req, res) => {
 		const token = await admin.auth().verifyIdToken(idToken);
 		const userCredentials = await admin.auth().getUser(token.uid);
 		const user = User.fromFirebase(userCredentials);
-		res.status(200).json({ status: 'success', user });
+		res.status(201).send(JSON.stringify(user));
 	} catch (error) {
 		res.status(401).json({ status: 'unauthorized' });
 	}
