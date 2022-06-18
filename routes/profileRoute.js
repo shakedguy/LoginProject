@@ -1,11 +1,9 @@
 import express from 'express';
 import { getProfilePage } from '../controllers/profileController.js';
 import authorizationMiddleware from '../middlewares/authorization.js';
-import userDataCookieMiddleware from '../middlewares/userDataCookie.js';
 const profileRoute = express.Router();
 
 profileRoute.use(authorizationMiddleware);
-profileRoute.use(userDataCookieMiddleware);
 
 profileRoute.route('/').get(getProfilePage);
 

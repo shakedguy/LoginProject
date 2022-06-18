@@ -1,4 +1,9 @@
 import admin from 'firebase-admin';
+import User from '../models/User.js';
+// import dayjs from 'dayjs';
+
+const dateTimeUiFormat = 'DD/MM/YYYY HH:mm';
+const dateTimeBigQueryFormat = 'YYYY-MM-DDTHH:mm:ss';
 
 const getContacts = (db) => {
 	const contacts = [];
@@ -28,53 +33,52 @@ const ref = db.ref('/');
 let admins = [];
 
 const updateUsersDatabase = async (usersRef, nextPageToken) => {
-	admin
-		.auth()
-		.listUsers(1000, nextPageToken)
-		.then(async (listUsersResult) => {
-			const newUsers = listUsersResult.users.map((userRecord) => {
-				return {
-					uid: userRecord.uid,
-					email: userRecord.email || '',
-					displayName: userRecord.displayName || '',
-					emailVerified: userRecord.emailVerified || false,
-					photoURL: userRecord.photoURL || '',
-					phoneNumber: userRecord.phoneNumber || '',
-					disabled: userRecord.disabled || false,
-					metadata: {
-						creationTime: new Date(userRecord.metadata.creationTime).toLocaleString('he-IL') || null,
-						lastRefreshTime: new Date(userRecord.metadata.lastRefreshTime).toLocaleString('he-IL') || null,
-						lastSignInTime: new Date(userRecord.metadata.lastSignInTime).toLocaleString('he-IL') || null,
-					},
-					passwordHash: userRecord.passwordHash || null,
-					passwordSalt: userRecord.passwordSalt || null,
-					providerData: {
-						uid: userRecord.providerData[0].uid || null,
-						displayName: userRecord.providerData[0].displayName || null,
-						email: userRecord.providerData[0].email || null,
-						photoURL: userRecord.providerData[0].photoURL || null,
-						providerId: userRecord.providerData[0].providerId || null,
-						phoneNumber: userRecord.providerData[0].phoneNumber || null,
-					},
-					tokensValidAfterTime: userRecord.tokensValidAfterTime || null,
-				};
-			});
+	const usersList = await admin.auth().listUsers(1000, nextPageToken);
+	const newUsers = await Promise.all(usersList.users.map(async (user) => await User.fromFirebase(user)));
+	await usersRef.set(newUsers);
 
-			ref.on('value', (snapshot) => {
-				admins = snapshot.val().Admins;
-				newUsers.forEach((user) => (user['admin'] = admins.includes(user.email)));
-			});
-			await usersRef.remove();
-			await usersRef.set(newUsers);
-
-			if (listUsersResult.pageToken) {
-				// List next batch of users.
-				await updateUsersDatabase(usersRef, listUsersResult.pageToken);
-			}
-		})
-		.catch((error) => {
-			console.log('Error listing users:', error);
-		});
+	if (usersList.pageToken) {
+		await updateUsersDatabase(usersRef, listUsersResult.pageToken);
+	}
 };
 
-export { getContacts, getUsers, updateUsersDatabase };
+const checkDatabase = async (bigQuery) => {
+	let dataset = bigQuery.dataset('SocialLogin');
+	let [exists] = await dataset.exists();
+
+	if (!exists) {
+		[dataset] = await bigQuery.createDataset('SocialLogin', { location: 'US' });
+	}
+	const [tables] = await dataset.getTables();
+
+	exists = tables.find((table) => table.id === 'Users');
+	if (!exists) {
+		const schema = User.schema();
+		const options = {
+			schema,
+			location: 'US',
+		};
+		await dataset.createTable('Users', options);
+	}
+	exists = tables.find((table) => table.id === 'Admins');
+	if (!exists) {
+		const schema = [{ name: 'Id', type: 'STRING', mode: 'REQUIRED' }];
+		const options = {
+			schema,
+			location: 'US',
+		};
+		await dataset.createTable('Admins', options);
+	}
+};
+
+const filterContacts = (contacts) => contacts.filter((contact) => contact.Email || contact.PhoneNumber);
+
+export {
+	getContacts,
+	getUsers,
+	updateUsersDatabase,
+	checkDatabase,
+	filterContacts,
+	dateTimeUiFormat,
+	dateTimeBigQueryFormat,
+};

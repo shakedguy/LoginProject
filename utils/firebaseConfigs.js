@@ -7,4 +7,5 @@ export const firebaseConfig = {
 	storageBucket: env.FIREBASE_STORAGE_BUCKE,
 	messagingSenderId: env.FIREBASE_MESSAGEING_SENDER_ID,
 	appId: env.FIREBASE_APP_ID,
+	measurementId: env.FIREBASE_MEASUREMENT_ID,
 };

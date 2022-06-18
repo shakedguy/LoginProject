@@ -1,37 +1,28 @@
-import admin from 'firebase-admin';
-import { updateUsersDatabase, getUsers } from '../../utils/helpers.js';
-import { firebaseConfig } from '../../utils/firebaseConfigs.js';
-
-const db = admin.database();
-const ref = db.ref('/');
-const usersRef = ref.child('Users');
-let users = null;
-(async () => await updateUsersDatabase(usersRef))();
-ref.on('value', (snapshot) => {
-	users = getUsers(snapshot.val().Users);
-});
+import AppSettings from '../../utils/appsettings.js';
+import User from '../../models/User.js';
+import { UsersDB } from '../../utils/databases.js';
 
 const getAllUsers = async (req, res) => {
-	const { uid } = req.query;
+	const { id } = req.query;
+	const { userData } = req;
 	const admin = req.baseUrl.includes('admin');
 	if (admin) {
-		const data = uid ? users.find((user) => user.uid === uid) : users;
-		const view = uid ? 'user' : 'users';
+		const view = id ? 'User' : 'Users';
+		const title = id ? AppSettings.page_titles.user_profile : AppSettings.page_titles.users;
+		const headers = id ? User.ProfileHeaders : User.TableHeaders;
+		const data = { title, isLogedIn: true, userData: userData, headers };
+		if (id) {
+			const response = await UsersDB.get(id);
+			if (response) data.user = User.toUi(response);
+		}
 
-		res.render(view, {
-			users: data,
-			title: 'Users Page',
-			firebaseConfig,
-			isLogedIn: true,
-			userData: req.userData,
-		});
+		res.render(view, data);
 	} else {
 		res.render('error', {
 			title: 'Error Page',
 			message: 'Unauthorized, Admin only',
-			firebaseConfig,
 			isLogedIn: true,
-			userData: req.userData,
+			userData,
 		});
 	}
 };
@@ -43,7 +34,7 @@ const getUser = async (req, res) => {
 		res.render('users', {
 			users: users[uid],
 			title: 'Users Page',
-			firebaseConfig,
+
 			isLogedIn: true,
 			userData: req.userData,
 			admin,
@@ -51,7 +42,6 @@ const getUser = async (req, res) => {
 	} else {
 		res.render('error', {
 			title: 'Error',
-			firebaseConfig,
 			userData: req.userData,
 			message: 'Unauthorized, Admin only',
 			admin,
@@ -60,3 +50,8 @@ const getUser = async (req, res) => {
 };
 
 export { getAllUsers, getUser };
+
+// INSERT INTO `react-login-bd9ed.SocialLogin.Users`
+// (Id, Name, Email, EmailVerified, PhoneNumber, Provider, CreationTime, LastLogin,
+// LastRefreshTime, Disabled, PasswordHash, PasswordSalt, TokensValidAfterTime, Admin)
+// VALUES ("30s6dnXO8phkTXtnZL6YvdyNNwl1","tal geler", "tal.g.jul@gmail.com",true,"undefined","google.com", "14/03/2022 00:57","12/04/2022 21:03","12/04/2022 21:03",false,"undefined","undefined","12/04/2022 21:03",false)

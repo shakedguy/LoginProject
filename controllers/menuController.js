@@ -1,9 +1,8 @@
-const items = ['Home', 'Profile', 'Admin'];
-const adminItems = ['Home', 'Profile', 'Messages', 'Users'];
+import { MenuDB, AdminMenuDB } from '../utils/databases.js';
 
 const getMenuItems = (req, res) => {
-	const data = req.baseUrl.includes('admin') && req.cookies.idToken ? adminItems : items;
-	res.status(200).json(data);
+	const menu = req.baseUrl.includes('admin') && req.cookies.idToken ? AdminMenuDB.Rows : MenuDB.Rows;
+	res.status(200).json(menu);
 };
 
 export { getMenuItems };

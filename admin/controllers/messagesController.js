@@ -1,42 +1,33 @@
-import admin from 'firebase-admin';
-import { getContacts } from '../../utils/helpers.js';
 import { firebaseConfig } from '../../utils/firebaseConfigs.js';
 import twilio from 'twilio';
 import { MailService } from '@sendgrid/mail';
-
+import AppSettings from '../../utils/appsettings.js';
 const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
 const sgMail = new MailService();
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-let contacts = [];
-const db = admin.database();
-const ref = db.ref('/');
-ref.once('value', (snapshot) => {
-	contacts = getContacts(snapshot.val().Contacts);
-});
-
-const from = process.env.TWILIO_NUMBER;
+const from = String(process.env.TWILIO_NUMBER);
 
 const getSenderPage = (req, res) => {
 	const admin = req.baseUrl.includes('admin');
+	const { userData } = req;
+	const isLogedIn = userData ? true : false;
 	if (admin) {
-		res.render('sender', {
-			title: 'Messages Page',
-			isLogedIn: true,
-			userData: req.userData,
+		res.render('Sender', {
+			title: AppSettings.page_titles.messages,
+			isLogedIn,
+			userData,
 			firebaseConfig,
-			contacts,
 		});
 	} else {
-		res.render('error', {
+		res.render('Error', {
 			title: 'Error Page',
 			message: 'Unauthorized, Admin only',
-			isLogedIn: true,
-			userData: req.userData,
+			isLogedIn,
+			userData,
 			firebaseConfig,
-			contacts,
 		});
 	}
 };
@@ -51,7 +42,7 @@ const prepareMessages = (req, res, next) => {
 			if (via === 'email') {
 				messageObj = {
 					to: contact.email,
-					from: 'shakedguy94@gmail.com',
+					from: AppSettings.my_email,
 					subject: subject || 'Message from Guy Shaked',
 					text: message || `Hi ${contact.displayName || ''}, this is a test message from ${req.userData.name}`,
 				};

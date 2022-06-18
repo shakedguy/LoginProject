@@ -1,7 +1,10 @@
+'use strict';
 import express from 'express';
-import {} from './utils/initFirebase.js';
+import cookieSession from 'cookie-session';
+import Keygrip from 'keygrip';
+import * as React from 'express-react-views';
+import {} from './utils/initServices.js';
 import serveFavicon from 'serve-favicon';
-import expressEjsLayouts from 'express-ejs-layouts';
 import cookieParser from 'cookie-parser';
 import csurf from 'csurf';
 import bodyParser from 'body-parser';
@@ -17,10 +20,7 @@ import errorRoute from './routes/errorRoute.js';
 import adminApp from './admin/adminApp.js';
 import mobileApi from './mobile/mobile.js';
 
-const defaultLayout = new URL('./views/layouts/default.ejs', import.meta.url).pathname;
-const staticFolder = new URL('./public/', import.meta.url).pathname;
-const staticJs = new URL('./public/js/', import.meta.url).pathname;
-const staticCss = new URL('./public/css/', import.meta.url).pathname;
+const staticFolder = new URL('./static/', import.meta.url).pathname;
 
 // const accountSid = process.env.TWILIO_ACCOUNT_SID;
 // const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -40,6 +40,13 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(mobileApi);
+
+app.use(
+	cookieSession({
+		name: 'session',
+		keys: new Keygrip(['key1', 'key2'], 'SHA256', 'base64'),
+	})
+);
 
 // (async function () {
 //   const url = await ngrok.connect({
@@ -70,8 +77,6 @@ app.use(mobileApi);
 
 app.use(csurf({ cookie: true }));
 app.use(globalMiddleware);
-app.use(expressEjsLayouts);
-app.set('layout', defaultLayout);
 app.use('/', indexRoute);
 app.use('/admin', adminApp);
 app.use('/login', loginRoute);
@@ -80,10 +85,11 @@ app.use('/profile', profileRoute);
 app.use('/api/firebase', firebaseRoute);
 app.use('/api/menu', menuRoute);
 app.use(express.static(staticFolder));
-app.use('/css', express.static(staticCss));
-app.use('/js', express.static(staticJs));
-
-app.set('view engine', 'ejs');
+app.use(serveFavicon('./static/assets/favicon.ico'));
+app.set('view engine', 'jsx');
+const options = { beautify: true };
+app.engine('jsx', React.createEngine(options));
+app.set('views', './views');
 
 app.use('*', errorRoute);
 
@@ -91,3 +97,52 @@ export default app;
 
 // "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
 // "build:js": "parcel watch ./public/js/index.js --out ./public/js/bundle.js"
+
+// "apiendpoint": "http://localhost:3035",
+// "second": 2,
+// "booleanflag": true,
+// "test": {
+// 	"test": "test"
+// },
+// "my_email": "shakedguy94@gmail.com",
+// "page_titles": {
+// 	"home": "Home",
+// 	"profile": "Profile",
+// 	"login": "Login",
+// 	"admin_login": "Login as Admin",
+// 	"messages": "Messages",
+// 	"Users": "Users"
+// }
+
+// "props": ["name", "email", "phone", "country", "getName", "getEmail", "getPhone", "getCountry"],
+// "values": [
+// 	{ "type": "property", "value": "Guy Shaked" },
+// 	{ "type": "property", "value": "shakedguy94@gmail.com" },
+// 	{ "type": "property", "value": "+972542422521" },
+// 	{ "type": "property", "value": "Israel" },
+// 	{ "type": "function", "value": "() =>{ return this.name; }" },
+// 	{ "type": "function", "value": "() =>{ return this.email; }" },
+// 	{ "type": "function", "value": "() =>{ return this.phone; }" },
+// 	{ "type": "function", "value": "() =>{ return this.country; }" }
+// ]
+// const classBuilder = (...properties) => {
+// 	return class {
+// 		constructor(...values) {
+// 			for (const [index, property] of properties.entries()) {
+// 				if (values[index].type === 'function') {
+// 					this[property] = eval(values[index].value);
+// 				} else {
+// 					this[property] = values[index].value;
+// 				}
+// 			}
+// 		}
+// 	};
+// };
+
+// const TestClass = classBuilder(...AppSettings.props);
+
+// const Todo = new TestClass(...AppSettings.values);
+
+// const AppSettingsClass = class {};
+
+// export { AppSettingsClass, classBuilder, TestClass, Todo };

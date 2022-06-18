@@ -1,15 +1,11 @@
-import { firebaseConfig } from '../utils/firebaseConfigs.js';
-
-const getHomePage = (req, res) => {
-	const sessionCookie = req.cookies.idToken || null;
-	const isLogedIn = sessionCookie ? true : false;
+import AppSettings from '../utils/appsettings.js';
+const getHomePage = async (req, res) => {
 	const userData = req.cookies.userData || null;
-
-	res.render('index', {
-		title: 'Home Page',
-		isLogedIn,
-		firebaseConfig,
+	const isLogedIn = userData ? true : false;
+	res.render('Index', {
+		title: AppSettings.page_titles.home,
 		userData,
+		isLogedIn,
 	});
 };
 
