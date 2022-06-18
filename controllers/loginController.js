@@ -6,7 +6,7 @@ import { AdminsDB, UsersDB } from '../utils/databases.js';
 
 const getLoginPage = (req, res) => {
 	const sessionCookie = req.cookies.idToken || null;
-	const { userData } = req.session;
+	const { userData } = req;
 	const isLogedIn = sessionCookie ? true : false;
 	const admin = req.baseUrl.includes('admin');
 	if (isLogedIn) {

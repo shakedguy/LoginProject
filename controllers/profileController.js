@@ -3,7 +3,7 @@ import { firebaseConfig } from '../utils/firebaseConfigs.js';
 import User from '../models/User.js';
 
 const getProfilePage = (req, res) => {
-	const { userData } = req.session;
+	const { userData } = req;
 	const { redirectFromLogin } = req.cookies;
 	const isLogedIn = userData ? true : false;
 	res.render('profile', {
