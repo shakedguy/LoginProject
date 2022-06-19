@@ -43,9 +43,9 @@ const login = async (req, res) => {
 		const decodedToken = await admin.auth().verifyIdToken(idToken);
 
 		const userRecord = await admin.auth().getUser(decodedToken.uid);
-		const user = await User.fromFirebase(userRecord);
+		const user = User.fromFirebase(userRecord);
 
-		const isAdmin = await AdminsDB.exists(user.Id);
+		const isAdmin = AdminsDB.exists(user.Id);
 		const adminMode = req.baseUrl.includes('admin');
 
 		if (adminMode && !isAdmin) {
