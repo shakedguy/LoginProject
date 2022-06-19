@@ -10,7 +10,7 @@ admin.initializeApp({
 
 const bigQueryConfig = {
 	projectId: 'react-login-bd9ed',
-	credentials: bigQueryServiceAccount,
+	keyFilename: 'utils/react-login-bd9ed-743c923cb687.json',
 };
 const bigQuery = new BigQuery(bigQueryConfig);
 
