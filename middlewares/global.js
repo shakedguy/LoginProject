@@ -1,16 +1,15 @@
 import express from 'express';
 import helmet from 'helmet';
-import compression from 'compression';
+// import compression from 'compression';
 
 const app = express();
-const compressMiddleware = (req, res) => {
-	if (req.headers['x-no-compression']) {
-		// don't compress responses with this request header
-		return false;
-	}
-	return compression.filter(req, res);
-};
-app.use(compression({ filter: compressMiddleware }));
+// const compressMiddleware = (req, res) => {
+// 	if (req.headers['x-no-compression']) {
+// 		return false;
+// 	}
+// 	return compression.filter(req, res);
+// };
+// app.use(compression({ filter: compressMiddleware }));
 app.use(helmet.crossOriginResourcePolicy());
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.expectCt());

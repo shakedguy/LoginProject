@@ -1,7 +1,7 @@
 'use strict';
 import express from 'express';
-import cookieSession from 'cookie-session';
-import Keygrip from 'keygrip';
+// import cookieSession from 'cookie-session';
+// import Keygrip from 'keygrip';
 import * as React from 'express-react-views';
 import {} from './utils/initServices.js';
 import serveFavicon from 'serve-favicon';
@@ -41,12 +41,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(mobileApi);
 
-app.use(
-	cookieSession({
-		name: 'session',
-		keys: new Keygrip(['key1', 'key2'], 'SHA256', 'base64'),
-	})
-);
+// app.use(
+// 	cookieSession({
+// 		name: 'session',
+// 		keys: new Keygrip(['key1', 'key2'], 'SHA256', 'base64'),
+// 	})
+// );
 
 // (async function () {
 //   const url = await ngrok.connect({
