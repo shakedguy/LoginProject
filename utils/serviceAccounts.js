@@ -1,13 +1,3 @@
-import * as fs from 'fs';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { Storage } from '@google-cloud/storage';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const storage = new Storage({ credentials: JSON.parse(process.env.GOOGLE_CLOUD_STORAGE) });
-const bucket = storage.bucket('social-login-bucket');
-
 // const deleteFiles = () => {
 // 	fs.unlinkSync(firebasePath);
 // 	fs.unlinkSync(bigQueryPath);
