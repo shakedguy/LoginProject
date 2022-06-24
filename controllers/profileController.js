@@ -6,7 +6,7 @@ const getProfilePage = (req, res) => {
 	const { userData } = req;
 	// const { redirectFromLogin } = req.cookies;
 	const isLogedIn = userData ? true : false;
-	res.render('profile', {
+	res.render('Profile', {
 		title: AppSettings.page_titles.profile,
 		isLogedIn,
 		userData,
