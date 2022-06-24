@@ -4,7 +4,7 @@
 	"description": "Demo for a final project for a bachelor's degree in computer science",
 	"type": "module",
 	"scripts": {
-		"start": "node ./server.js"
+		"start": "web: node ./server.js"
 	},
 	"author": "Guy Shaked",
 	"dependencies": {
