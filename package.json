@@ -5,9 +5,7 @@
 	"main": "./server.js",
 	"type": "module",
 	"scripts": {
-		"start": "node ./server.js",
-		"dev": "nodemon ./server.js",
-		"sass": "node-sass -w ./static/sass/main.scss -o ./static/css"
+		"start": "node ./server.js"
 	},
 	"repository": {
 		"type": "git",
@@ -63,7 +61,6 @@
 		"uuid": "^8.3.2",
 		"xss-clean": "^0.1.1"
 	},
-	"devDependencies": {},
 	"engines": {
 		"node": ">=16.13.1"
 	}

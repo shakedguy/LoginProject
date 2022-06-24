@@ -85,7 +85,7 @@ app.use('/profile', profileRoute);
 app.use('/api/firebase', firebaseRoute);
 app.use('/api/menu', menuRoute);
 app.use(express.static(staticFolder));
-app.use(serveFavicon('./static/assets/favicon.ico'));
+app.use('/favicon.ico', serveFavicon('./static/assets/favicon.ico'));
 app.set('view engine', 'jsx');
 const options = { beautify: true };
 app.engine('jsx', React.createEngine(options));
