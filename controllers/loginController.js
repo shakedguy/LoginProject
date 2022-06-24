@@ -63,10 +63,10 @@ const login = async (req, res) => {
 			if (adminMode) {
 				res.cookie('admin', true, options);
 			}
-			const exists = UsersDB.exists(user.Id);
-			if (!exists) {
-				await UsersDB.insert(user);
-			}
+			// const exists = UsersDB.exists(user.Id);
+			// if (!exists) {
+			// 	await UsersDB.insert(user);
+			// }
 			res.status(200).json({ status: 'success' });
 		}
 	} catch (error) {
