@@ -4,11 +4,11 @@ import express from 'express';
 // import Keygrip from 'keygrip';
 import * as React from 'express-react-views';
 import {} from './utils/initServices.js';
-import serveFavicon from 'serve-favicon';
+import path, { dirname } from 'path';
+import { fileURLToPath, URL } from 'url';
 import cookieParser from 'cookie-parser';
 import csurf from 'csurf';
 import bodyParser from 'body-parser';
-import { URL } from 'url';
 import globalMiddleware from './middlewares/global.js';
 import indexRoute from './routes/indexRoute.js';
 import firebaseRoute from './routes/firebaseRoute.js';
@@ -19,7 +19,8 @@ import menuRoute from './routes/menuRoute.js';
 import errorRoute from './routes/errorRoute.js';
 import adminApp from './admin/adminApp.js';
 import mobileApi from './mobile/mobile.js';
-
+import serveFavicon from 'serve-favicon';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const staticFolder = new URL('./static/', import.meta.url).pathname;
 
 // const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -85,7 +86,8 @@ app.use('/profile', profileRoute);
 app.use('/api/firebase', firebaseRoute);
 app.use('/api/menu', menuRoute);
 app.use(express.static(staticFolder));
-app.use('/favicon.ico', serveFavicon('./static/assets/favicon.ico'));
+app.use(serveFavicon(path.join(__dirname, 'static', 'assets', 'favicon.ico')));
+
 app.set('view engine', 'jsx');
 const options = { beautify: true };
 app.engine('jsx', React.createEngine(options));
