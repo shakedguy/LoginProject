@@ -9,6 +9,7 @@ admin.initializeApp({
 });
 
 const bigQueryConfig = {
+	projectId: process.env.BIGQUERY_PROJECT_ID,
 	credentials: bigQueryServiceAccount,
 };
 const bigQuery = new BigQuery(bigQueryConfig);

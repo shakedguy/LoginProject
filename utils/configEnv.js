@@ -1,5 +1,5 @@
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
-// dotenv.config({ silent: true, path: './config.env' });
+dotenv.config({ silent: true, path: './config.env' });
 
-// export {};
+export {};
