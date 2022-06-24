@@ -1,4 +1,4 @@
-import {} from './utils/configEnv.js';
+// import {} from './utils/configEnv.js';
 import express from 'express';
 import app from './app.js';
 
