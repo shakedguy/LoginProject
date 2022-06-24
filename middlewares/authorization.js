@@ -6,7 +6,7 @@ const authorizationMiddleware = async (req, res, next) => {
 	try {
 		const userData = await admin.auth().verifySessionCookie(sessionCookie, true);
 		// const user = await UsersDB.get(userData.uid);
-		req.userData = User.toUi(user);
+		req.userData = User.toUi(userData);
 		next();
 	} catch (error) {
 		const redirect = req.baseUrl.includes('admin') ? '/admin/login' : '/login';
