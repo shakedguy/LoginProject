@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Demo for a final project for a bachelor's degree in computer science",
 	"type": "module",
+	"main": "server.js",
 	"license": "MIT",
 	"scripts": {
 		"start": "node ./server.js"
