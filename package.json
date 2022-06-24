@@ -2,22 +2,11 @@
 	"name": "loginproject",
 	"version": "1.0.0",
 	"description": "Demo for a final project for a bachelor's degree in computer science",
-	"main": "./server.js",
 	"type": "module",
 	"scripts": {
 		"start": "node ./server.js"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/shakedguy/LoginProject.git"
-	},
-	"keywords": [],
 	"author": "Guy Shaked",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/shakedguy/LoginProject/issues"
-	},
-	"homepage": "https://github.com/shakedguy/LoginProject#readme",
 	"dependencies": {
 		"@google-cloud/bigquery": "^6.0.0",
 		"@popperjs/core": "^2.11.2",
