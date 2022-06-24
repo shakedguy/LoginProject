@@ -28,7 +28,6 @@
 		"@popperjs/core": "^2.11.2",
 		"@sendgrid/mail": "^7.6.2",
 		"@vonage/server-sdk": "^2.10.7-beta-2",
-		"all": "^0.0.0",
 		"axios": "^0.27.2",
 		"body-parser": "^1.19.2",
 		"bootstrap": "^5.1.3",
