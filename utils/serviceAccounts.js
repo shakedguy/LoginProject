@@ -12,19 +12,19 @@
 // const firebasePath = process.env.FIREBASE_REMOTE_FILE_NAME;
 // const bigQueryPath = process.env.BIG_QUERY_REMOTE_FILE_NAME;
 
-const firebaseRemoteFile = bucket.file(process.env.FIREBASE_REMOTE_FILE_NAME);
-const bigQueryRemoteFile = bucket.file(process.env.BIG_QUERY_REMOTE_FILE_NAME);
-firebaseRemoteFile.createReadStream().on('data', function (chunk) {
-	const response = Buffer.concat([Buffer.from(''), chunk]);
-	process.env['FIREBASE_SERVICE_ACCOUNT_OBJECT'] = JSON.stringify(response.toString());
-});
-bigQueryRemoteFile.createReadStream().on('data', function (chunk) {
-	const response = Buffer.concat([Buffer.from(''), chunk]);
+// const firebaseRemoteFile = bucket.file(process.env.FIREBASE_REMOTE_FILE_NAME);
+// const bigQueryRemoteFile = bucket.file(process.env.BIG_QUERY_REMOTE_FILE_NAME);
+// firebaseRemoteFile.createReadStream().on('data', function (chunk) {
+// 	const response = Buffer.concat([Buffer.from(''), chunk]);
+// 	process.env['FIREBASE_SERVICE_ACCOUNT_OBJECT'] = JSON.stringify(response.toString());
+// });
+// bigQueryRemoteFile.createReadStream().on('data', function (chunk) {
+// 	const response = Buffer.concat([Buffer.from(''), chunk]);
 
-	process.env['BIG_QUERY_SERVICE_ACCOUNT_OBJECT'] = JSON.stringify(response.toString());
-});
+// 	process.env['BIG_QUERY_SERVICE_ACCOUNT_OBJECT'] = JSON.stringify(response.toString());
+// });
 
-const env = process.env;
+// const env = process.env;
 // const firebaseAdminServiceAccount = {
 // 	type: env.FIREBASE_TYPE,
 // 	project_id: env.FIREBASE_PROJECT_ID,
@@ -56,6 +56,4 @@ const bigQueryServiceAccount = JSON.parse(process.env.BIG_QUERY_SERVICE_ACCOUNT)
 // 	client_x509_cert_url: env.BIG_QUERY_CLIENT_X509_CERT_URL,
 // };
 
-const googleStorageServiceAccount = JSON.parse(process.env.GOOGLE_CLOUD_STORAGE);
-
-export { firebaseAdminServiceAccount, bigQueryServiceAccount, googleStorageServiceAccount };
+export { firebaseAdminServiceAccount, bigQueryServiceAccount };
