@@ -128,6 +128,7 @@ const User = class {
 
 	static fromFirebase = (user) => {
 		const res = new User();
+
 		res.Id = user.uid;
 		const providerData = user.providerData.find((obj) => obj.hasOwnProperty('providerId'));
 		res.Name = user.displayName || providerData.displayName || null;
